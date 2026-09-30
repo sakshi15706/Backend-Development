@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>All Posts | Simple CMS</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="/posts">Simple CMS</a>
+    <a class="btn" href="/posts/new">+ Create Post</a>
+  </header>
+  <main class="container">
+    <h1>All Posts</h1>
+
+    <% if (posts.length === 0) { %>
+      <p class="muted">No posts yet. <a href="/posts/new">Create the first one.</a></p>
+    <% } %>
+
+    <% posts.forEach(function (post) { %>
+      <article class="post-item">
+        <h2><a href="/posts/<%= post._id %>"><%= post.title %></a></h2>
+        <p class="meta">By <%= post.author %></p>
+        <p class="meta"><%= formatDate(post.createdAt) %></p>
+      </article>
+    <% }) %>
+  </main>
+</body>
+</html>

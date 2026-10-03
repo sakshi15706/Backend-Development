@@ -187,23 +187,3 @@ A responsive web page was created using Bootstrap 5, and its layout and componen
 ## 10. Conclusion
 
 Bootstrap speeds up web development because its grid system, ready-made components and utility classes handle most of the responsive design. Compared with plain CSS (Experiment 3), the same responsive result needed much less code, and the components with JavaScript worked without writing any script.
-
-## 11. Viva Questions
-
-1. **What is Bootstrap?** A free front-end framework with ready-made CSS and JavaScript for building responsive, mobile-first websites.
-2. **How do you add Bootstrap to a page?** Through CDN links for the CSS in `<head>` and the JS bundle before `</body>`, or by downloading the files.
-3. **What is the Bootstrap grid system?** A layout system that divides the page into 12 columns using `container`, `row` and `col-*` classes.
-4. **What are the breakpoints in Bootstrap 5?** `sm` (576px), `md` (768px), `lg` (992px), `xl` (1200px) and `xxl` (1400px).
-5. **Difference between `container` and `container-fluid`?** `container` has a fixed maximum width at each breakpoint. `container-fluid` always takes the full width.
-6. **What does `col-md-6` mean?** The element takes 6 of 12 columns (half the width) on medium screens and above, and stacks full width on smaller screens.
-7. **What is `col-12 col-sm-6 col-lg-3`?** Full width on phones, half on small screens, and one quarter (4 per row) on large screens.
-8. **How do you make an image responsive in Bootstrap?** Add the class `img-fluid`.
-9. **How do you make a table responsive?** Wrap the table in a `div` with class `table-responsive`.
-10. **What is `navbar-expand-lg`?** The navbar shows the full menu on large screens and collapses into a hamburger menu on smaller screens.
-11. **What are `data-bs-toggle` and `data-bs-target`?** Attributes that let Bootstrap's JavaScript open a modal, collapse or dropdown without writing script.
-12. **What are utility classes? Give examples.** Small classes for common styles, like `mt-3` (margin), `p-4` (padding), `text-center`, `bg-dark`, `d-none`.
-13. **What do the classes `d-none d-md-block` do?** They hide the element on small screens and show it from medium screens upwards.
-14. **What is the use of the `g-4` class?** It sets the gap (gutter) between grid columns.
-15. **Difference between Bootstrap and plain CSS?** Bootstrap gives pre-written, tested classes and components, so pages are built faster. Plain CSS gives full control but needs more code.
-16. **Why is the Bootstrap JS bundle needed?** For interactive components like the navbar toggle, modal, carousel, accordion and dropdown. The bundle includes Popper, which dropdowns need.
-17. **What are the disadvantages of Bootstrap?** Sites can look alike, the CSS file is large, and overriding default styles takes extra effort.

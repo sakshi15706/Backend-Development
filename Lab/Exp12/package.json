@@ -1,0 +1,19 @@
+{
+  "name": "exp12-nodejs-server-side",
+  "version": "1.0.0",
+  "description": "Experiment 12: Programs to familiarize Server-Side Scripting using Node JS",
+  "scripts": {
+    "hello": "node 1_hello_server.js",
+    "routing": "node 2_routing_server.js",
+    "fs": "node 3_file_system.js",
+    "modules": "node 4_modules.js",
+    "events": "node 5_events.js",
+    "form": "node 6_form_server.js",
+    "api": "node 7_json_api.js",
+    "core": "node 8_core_modules.js",
+    "express": "node 9_express_server.js"
+  },
+  "dependencies": {
+    "express": "^4.19.2"
+  }
+}

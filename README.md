@@ -29,8 +29,8 @@
 
 ### Experiment 12: Programs to Familiarize Server-Side Scripting using Node JS
 
-- [Exp 5: Server-Side Scripting- Page](Lab/Exp12/1_hello_server.js)
-- [Exp 5: Server-Side Scripting - Report](Lab/Exp12/Report.md)
+- [Exp 12: Server-Side Scripting- Page](Lab/Exp12/1_hello_server.js)
+- [Exp 12: Server-Side Scripting - Report](Lab/Exp12/Report.md)
 
 ## Viva
 

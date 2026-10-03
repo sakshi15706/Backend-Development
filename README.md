@@ -41,8 +41,10 @@
 
 - [T 1: Python Program](Theory/flask%20server/main.py)
 
+## Assignment 2: PostgreSQL as SQL + NoSQL: Working with JSONB
 
-
+- [Ass 2: PostgreSQL- Page](/Theory/Assignment%20-%202/01_schema.sql)
+- [Ass 2: PostgreSQL- Report](/Theory/Assignment%20-%202/Report.md)
 
 ## Name - Sakshi Jaiswal
 ## Sap Id - 590015706

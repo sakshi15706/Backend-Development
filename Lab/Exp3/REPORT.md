@@ -3,7 +3,7 @@
 **Session:** 3  
 **Course Outcome:** CO2  
 **Student:** Sakshi  
-**Date:** 3 October 2026  
+**Date:** 12 September 2026  
 **Files:** `index.html`, `style.css`
 
 ---

@@ -39,7 +39,12 @@
 
 ## Theory
 
-- [T 1: Python Program](Theory/flask%20server/main.py)
+- [T 1: Python Program](/Theory/flask%20server/main.py)
+
+## Assignment 1: Notes App
+
+- [Ass 1: Notes App- Page](/Theory/Assignment%20-%201/)
+- [Ass 1: Notes App- Report](/Theory/Assignment%20-%201/)
 
 ## Assignment 2: PostgreSQL as SQL + NoSQL: Working with JSONB
 

@@ -212,22 +212,3 @@ A web page using inline, internal and external CSS with selectors, box model, la
 ## 10. Conclusion
 
 CSS separates design from content and makes web pages attractive, consistent and responsive. External CSS is best for large websites because one file styles many pages, internal CSS suits a single page, and inline CSS is useful for a quick change on one element.
-
-## 11. Viva Questions
-
-1. **What is CSS?** A language used to style HTML pages: colours, fonts, spacing and layout.
-2. **What are the types of CSS?** Inline, internal and external (and imported using `@import`).
-3. **Which type is best and why?** External CSS, because one file can style many pages and it is easy to maintain.
-4. **Which CSS has the highest priority?** Inline CSS.
-5. **Difference between class and ID selector?** A class (`.name`) can be used on many elements. An ID (`#name`) must be unique on a page.
-6. **What is the box model?** Every element is a box made of content, padding, border and margin.
-7. **Difference between padding and margin?** Padding is the space inside the border. Margin is the space outside the border.
-8. **Difference between `display: none` and `visibility: hidden`?** `none` removes the element and its space. `hidden` hides it but keeps its space.
-9. **Name the position values.** `static`, `relative`, `absolute`, `fixed`, `sticky`.
-10. **Difference between `relative` and `absolute` position?** `relative` moves the element from its normal place. `absolute` positions it with respect to the nearest positioned parent.
-11. **What is Flexbox? What is Grid?** Flexbox is a one-dimensional layout (row or column). Grid is a two-dimensional layout (rows and columns).
-12. **What is a pseudo-class? What is a pseudo-element?** A pseudo-class selects an element in a state (`:hover`). A pseudo-element selects a part of an element (`::first-letter`).
-13. **What is the difference between transition and animation?** A transition changes from one state to another when triggered (like hover). An animation uses `@keyframes` and can run on its own and repeat.
-14. **What is a media query?** A rule that applies styles only for certain screen sizes, used for responsive design.
-15. **What does `box-sizing: border-box` do?** It includes padding and border in the width and height of the element.
-16. **What are CSS variables?** Custom values like `--primary: #2c3e50;` defined once and reused with `var(--primary)`.

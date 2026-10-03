@@ -164,22 +164,3 @@ A responsive web page was created using HTML and CSS. Its layout adapted correct
 ## 10. Conclusion
 
 Responsive design lets one web page serve all devices. The viewport meta tag, flexible images, Flexbox or Grid and media queries are the four main tools. Writing the CSS mobile first keeps the code simple, because the larger layouts are only added when the screen is wide enough.
-
-## 11. Viva Questions
-
-1. **What is responsive web design?** Designing a page so that its layout adapts automatically to the screen size of the device.
-2. **What is the viewport meta tag? Why is it needed?** It sets the page width to the device width. Without it, mobile browsers show the page zoomed out like a desktop.
-3. **What is a media query?** A CSS rule applied only when conditions like screen width, orientation or print are true.
-4. **What is a breakpoint?** The screen width at which the layout changes, such as 600px or 900px.
-5. **What is mobile-first design?** Writing CSS for small screens first and using `min-width` media queries to add larger layouts.
-6. **Difference between `min-width` and `max-width` media queries?** `min-width` applies from that width upward. `max-width` applies from that width downward.
-7. **How do you make images responsive?** Use `max-width: 100%` and `height: auto`, so the image scales with its container.
-8. **What is the `<picture>` element used for?** To load different images for different screen sizes or conditions.
-9. **Which units are used in responsive design?** Relative units like `%`, `rem`, `em`, `vw`, `vh` and `fr`, instead of fixed `px`.
-10. **What is the `fr` unit?** A fraction of the free space in a CSS Grid container.
-11. **Difference between Flexbox and Grid?** Flexbox arranges items in one direction. Grid arranges items in rows and columns together.
-12. **How does the hamburger menu work in your page?** A hidden checkbox and a label. When the label is clicked, the checkbox becomes `:checked`, and the CSS selector `#menu-toggle:checked ~ .nav` shows the menu.
-13. **Why is the table inside a `div` with `overflow-x: auto`?** So a wide table scrolls sideways on small screens and does not break the layout.
-14. **What does `box-sizing: border-box` do?** It includes padding and border in the element's width and height, which makes sizing easier.
-15. **How do you test a responsive page?** Use the browser's Developer Tools (`F12`) with the device toolbar (`Ctrl + Shift + M`), or resize the window.
-16. **Difference between responsive and adaptive design?** Responsive design changes smoothly with any width using flexible layouts. Adaptive design uses a few fixed layouts for specific screen sizes.

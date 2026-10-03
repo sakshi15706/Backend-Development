@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Experiment 2 - All Types of CSS</title>
+
+  <!-- TYPE 1: EXTERNAL CSS (linked file) -->
+  <link rel="stylesheet" href="style.css">
+
+  <!-- TYPE 2: INTERNAL CSS (style tag inside head) -->
+  <style>
+    .internal-demo {
+      background-color: #e8f8f5;
+      color: #117a65;
+      border: 2px solid #117a65;
+      padding: 12px;
+      border-radius: 6px;
+    }
+
+    /* TYPE 4: IMPORTED CSS - uncomment to import another file:
+       @import url("extra.css");
+    */
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Experiment 2: CSS Demo Page</h1>
+    <p>Create a web page with all types of Cascading Style Sheets</p>
+  </header>
+
+  <nav>
+    <a href="#types">CSS Types</a>
+    <a href="#selectors">Selectors</a>
+    <a href="#text">Text and Colours</a>
+    <a href="#box">Box Model</a>
+    <a href="#layout">Layout</a>
+    <a href="#effects">Effects</a>
+    <a href="#table">Table and Lists</a>
+  </nav>
+
+  <main>
+
+    <!-- ============ 1. THREE TYPES OF CSS ============ -->
+    <section id="types">
+      <h2>1. Types of CSS</h2>
+
+      <!-- TYPE 3: INLINE CSS (style attribute) -->
+      <p style="color: white; background-color: #c0392b; padding: 10px; border-radius: 6px;">
+        <b>Inline CSS:</b> this paragraph is styled using the <code>style</code> attribute on the tag itself.
+      </p>
+
+      <p class="internal-demo">
+        <b>Internal CSS:</b> this paragraph is styled by the <code>&lt;style&gt;</code> block inside the <code>&lt;head&gt;</code>.
+      </p>
+
+      <p class="note">
+        <b>External CSS:</b> the rest of the page (header, navigation, sections, cards) is styled by <code>style.css</code>,
+        linked with <code>&lt;link rel="stylesheet"&gt;</code>.
+      </p>
+
+      <p class="note">
+        <b>Priority order:</b> Inline CSS &gt; ID selector &gt; Class selector &gt; Element selector.
+        With equal specificity, the rule written last wins.
+      </p>
+    </section>
+
+    <!-- ============ 2. SELECTORS ============ -->
+    <section id="selectors">
+      <h2>2. CSS Selectors</h2>
+
+      <h3>Universal, element, group, class and ID</h3>
+      <p>This text uses the <span class="highlight">class selector (.highlight)</span>.</p>
+      <div id="unique-box">This box uses the <b>ID selector (#unique-box)</b>.</div>
+
+      <h3>Combinator selectors</h3>
+      <div class="parent">
+        <p>Child selector (.parent &gt; p): direct child, shown in red.</p>
+        <div><p>This paragraph is a grandchild, so it is not red.</p></div>
+      </div>
+      <h3>Adjacent sibling heading</h3>
+      <p>This paragraph is directly after h3, so it is bold (h3 + p).</p>
+      <p>This paragraph is also after h3 but not adjacent, so it is normal.</p>
+      <p class="marker">Marker paragraph</p>
+      <p>General sibling (~): purple text.</p>
+      <p>General sibling (~): purple text.</p>
+
+      <h3>Attribute selectors</h3>
+      <p>
+        <input type="text" placeholder="type=text (blue border)">
+        <input type="email" placeholder="type=email (green border)">
+      </p>
+      <p>
+        <a href="https://www.w3.org" target="_blank">Link with target=_blank</a> |
+        <a href="notes.pdf">Link ending in .pdf</a>
+      </p>
+
+      <h3>Pseudo-classes</h3>
+      <p>Hover over this paragraph, click in the box below and move the mouse over the table rows.</p>
+      <input type="text" placeholder="Click here to see :focus">
+      <ul>
+        <li>First item (:first-child)</li>
+        <li>Middle item</li>
+        <li>Last item (:last-child)</li>
+      </ul>
+
+      <h3>Pseudo-elements</h3>
+      <p class="first-letter">The first letter of this paragraph is large because of ::first-letter. It floats to the left and is coloured red.</p>
+      <p class="first-line">The first line of this paragraph is bold and uppercase because of ::first-line. The remaining text is normal.</p>
+      <p class="quote">Quotation marks are added with ::before and ::after</p>
+      <p>Select any text on this page: the highlight colour comes from ::selection.</p>
+    </section>
+
+    <!-- ============ 3. TEXT, FONT, COLOUR ============ -->
+    <section id="text">
+      <h2>3. Colours, Text and Fonts</h2>
+
+      <p class="c-name">Colour name: tomato</p>
+      <p class="c-hex">Hex colour: #1abc9c</p>
+      <p class="c-rgb">RGB colour: rgb(155, 89, 182)</p>
+      <p class="c-rgba">RGBA colour with transparency</p>
+      <p class="c-hsl">HSL colour: hsl(30, 90%, 45%)</p>
+
+      <p class="t-center">text-align: center</p>
+      <p class="t-right">text-align: right</p>
+      <p class="t-justify">text-align: justify. CSS controls the look of web pages. Justified text spreads each line so both the left and right edges are straight, which can be seen when the paragraph is long enough to wrap over more than one line.</p>
+      <p class="t-upper">text-transform: uppercase</p>
+      <p class="t-lower">TEXT-TRANSFORM: LOWERCASE</p>
+      <p class="t-cap">text-transform: capitalize</p>
+      <p class="t-under">text-decoration: underline</p>
+      <p class="t-over">text-decoration: overline</p>
+      <p class="t-through">text-decoration: line-through</p>
+      <p class="t-spacing">letter-spacing and word-spacing</p>
+      <p class="t-shadow">Text shadow</p>
+      <p class="t-indent">text-indent: the first line of this paragraph starts a little to the right.</p>
+      <p class="f-style">Italic, bold, 20px, small-caps font</p>
+      <p class="f-family">font-family: Courier New (monospace)</p>
+    </section>
+
+    <!-- ============ 4. BOX MODEL, BORDER, BACKGROUND ============ -->
+    <section id="box">
+      <h2>4. Box Model, Borders and Backgrounds</h2>
+
+      <div class="box-demo">Box with width 300px, padding 20px, border 5px and margin 20px.</div>
+
+      <div class="border-styles">
+        <p class="b-solid">solid border</p>
+        <p class="b-dashed">dashed border</p>
+        <p class="b-dotted">dotted border</p>
+        <p class="b-double">double border</p>
+        <p class="b-groove">groove border</p>
+        <p class="b-radius">rounded border (border-radius)</p>
+      </div>
+
+      <div class="bg-gradient">Linear gradient background</div>
+      <br>
+      <div class="bg-radial">Radial gradient background</div>
+    </section>
+
+    <!-- ============ 5. LAYOUT ============ -->
+    <section id="layout">
+      <h2>5. Layout: Display, Position, Float, Flexbox and Grid</h2>
+
+      <h3>Display</h3>
+      <p>
+        <span class="d-inline">inline</span>
+        <span class="d-inline">inline</span>
+        <span class="d-block">block (takes full width)</span>
+        <span class="d-ib">inline-block</span>
+        <span class="d-ib">inline-block</span>
+        <span class="d-none">display none (not shown)</span>
+        <span class="v-hidden">visibility hidden (space remains)</span>
+      </p>
+
+      <h3>Position</h3>
+      <div class="pos-container">
+        <div class="pos-static">position: static</div>
+        <div class="pos-relative">position: relative</div>
+        <div class="pos-absolute">position: absolute</div>
+      </div>
+      <p class="pos-sticky">position: sticky (sticks to the top while scrolling this section)</p>
+
+      <h3>Float</h3>
+      <div class="clearfix">
+        <div class="float-left">Left</div>
+        <div class="float-right">Right</div>
+        <p>This text sits between two floated boxes. Floated elements move to the left or right and the text wraps around them. The clearfix class makes the parent contain its floated children.</p>
+      </div>
+
+      <h3>Flexbox</h3>
+      <div class="flex-container">
+        <div class="flex-item">Flex 1</div>
+        <div class="flex-item">Flex 2</div>
+        <div class="flex-item">Flex 3</div>
+      </div>
+
+      <h3>Grid</h3>
+      <div class="grid-container">
+        <div class="grid-item">1</div>
+        <div class="grid-item">2</div>
+        <div class="grid-item">3</div>
+        <div class="grid-item wide">4 (spans 2 columns)</div>
+        <div class="grid-item">5</div>
+      </div>
+    </section>
+
+    <!-- ============ 6. EFFECTS ============ -->
+    <section id="effects">
+      <h2>6. Transform, Transition, Animation and Other Effects</h2>
+
+      <h3>Transform with transition (hover over the boxes)</h3>
+      <div>
+        <div class="transform-box rotate">Rotate</div>
+        <div class="transform-box scale">Scale</div>
+        <div class="transform-box skew">Skew</div>
+        <div class="transform-box move">Move</div>
+      </div>
+
+      <h3>Animation</h3>
+      <div class="anim-wrapper"><div class="anim-box"></div></div>
+      <p><span class="pulse">&#9829; Pulsing text using @keyframes</span></p>
+
+      <h3>Opacity, cursor and overflow</h3>
+      <div class="opacity-box">opacity: 0.5</div>
+      <p class="cursor-pointer">Move the mouse here: cursor: pointer</p>
+      <div class="overflow-box">
+        overflow: scroll. This content is longer than the box, so scroll bars appear. CSS lets us control
+        what happens when content is bigger than its container. Keep scrolling to read all of this text.
+      </div>
+    </section>
+
+    <!-- ============ 7. TABLE AND LISTS ============ -->
+    <section id="table">
+      <h2>7. Table and List Styling</h2>
+
+      <table>
+        <tr><th>Name</th><th>Subject</th><th>Marks</th></tr>
+        <tr><td>Rahul</td><td>CSS</td><td>28</td></tr>
+        <tr><td>Priya</td><td>HTML</td><td>27</td></tr>
+        <tr><td>Amit</td><td>JavaScript</td><td>26</td></tr>
+        <tr><td>Neha</td><td>Bootstrap</td><td>29</td></tr>
+      </table>
+
+      <h3>List styles</h3>
+      <ul class="list-disc"><li>disc</li><li>disc</li></ul>
+      <ul class="list-square"><li>square</li><li>square</li></ul>
+      <ol class="list-roman"><li>upper-roman</li><li>upper-roman</li></ol>
+      <ul class="list-none"><li>no marker</li><li>no marker</li></ul>
+    </section>
+
+  </main>
+
+  <div class="pos-fixed">position: fixed</div>
+
+  <footer>
+    <p>&copy; 2026 Sakshi | Experiment 2: Cascading Style Sheets</p>
+  </footer>
+
+</body>
+</html>

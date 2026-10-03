@@ -167,20 +167,3 @@ A web page demonstrating all the major HTML5 elements was created successfully, 
 
 HTML5 gives a complete set of elements for structure, text, media, graphics, forms and interaction. Semantic elements make pages meaningful and accessible, and built-in audio, video, canvas and form features reduce the need for external plugins and extra scripting.
 
-## 11. Viva Questions
-
-1. **What is HTML5?** The latest version of HTML, used to structure web pages. It adds semantic tags, audio, video, canvas and new form inputs.
-2. **What is the use of `<!DOCTYPE html>`?** It tells the browser that the document is HTML5.
-3. **What are semantic elements? Name some.** Elements whose names describe their purpose: `header`, `nav`, `section`, `article`, `aside`, `footer`.
-4. **Difference between `<b>` and `<strong>`?** `<b>` only makes text bold. `<strong>` also means the text is important.
-5. **Difference between `<i>` and `<em>`?** `<i>` only makes text italic. `<em>` also gives emphasis to the text.
-6. **Difference between `canvas` and `svg`?** `canvas` is pixel-based and drawn with JavaScript. `svg` is vector-based and written in markup, so it does not lose quality when resized.
-7. **What is the use of `<meta name="viewport">`?** It makes the page fit different screen sizes, which helps responsive design.
-8. **What is the use of `datalist`?** It gives suggestions while typing in an input box.
-9. **What does `colspan` do? What does `rowspan` do?** `colspan` merges cells across columns. `rowspan` merges cells across rows.
-10. **Name some new input types in HTML5.** `email`, `date`, `color`, `range`, `number`, `url`, `tel`, `search`, `datetime-local`, `month`, `week`.
-11. **Difference between `progress` and `meter`?** `progress` shows the completion of a task. `meter` shows a value within a known range, such as disk usage.
-12. **What are `<details>` and `<summary>`?** They create a collapsible section. `summary` is the visible heading and `details` holds the hidden content.
-13. **Difference between block and inline elements?** Block elements (`div`, `p`, `h1`) take the full width and start on a new line. Inline elements (`span`, `a`, `b`) take only the needed width.
-14. **Which elements are used to add audio and video?** `<audio>` and `<video>`, with `<source>` for different file formats.
-15. **What is the use of `<fieldset>` and `<legend>`?** `fieldset` groups related form fields. `legend` gives the group a title.

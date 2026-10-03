@@ -1,0 +1,190 @@
+/* ==========================================================
+   Experiment 3: Responsive Web Page using HTML and CSS
+   Approach: MOBILE FIRST
+   - Base styles are written for small screens.
+   - min-width media queries add layout for bigger screens.
+   ========================================================== */
+
+:root {
+  --primary: #1f3a5f;
+  --accent: #3498db;
+  --light: #f4f6f8;
+  --text: #222;
+}
+
+/* ---------- Reset and base ---------- */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  line-height: 1.6;
+  color: var(--text);
+  background: #fff;
+}
+
+/* Flexible images: never wider than the container */
+img { max-width: 100%; height: auto; display: block; }
+.fluid { width: 100%; }
+
+a { color: var(--accent); }
+
+h1 { font-size: 1.8rem; }
+h2 { font-size: 1.5rem; margin-bottom: 14px; color: var(--primary); }
+h3 { font-size: 1.15rem; margin-bottom: 6px; color: var(--primary); }
+
+/* ---------- Header and navigation (mobile first) ---------- */
+.site-header {
+  background: var(--primary);
+  padding: 12px 20px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  z-index: 50;
+}
+.logo { color: #fff; font-size: 1.4rem; font-weight: bold; text-decoration: none; }
+.logo span { color: var(--accent); }
+
+#menu-toggle { display: none; }                 /* hidden checkbox */
+.menu-icon { color: #fff; font-size: 1.8rem; cursor: pointer; }
+
+.nav { display: none; width: 100%; flex-direction: column; margin-top: 10px; }
+.nav a { color: #fff; text-decoration: none; padding: 10px 0; border-top: 1px solid rgba(255,255,255,.2); }
+.nav a:hover { color: var(--accent); }
+
+/* When the checkbox is ticked, show the menu */
+#menu-toggle:checked ~ .nav { display: flex; }
+
+/* ---------- Hero ---------- */
+.hero {
+  background: linear-gradient(135deg, #1f3a5f, #3498db);
+  color: #fff;
+  text-align: center;
+  padding: 50px 20px;
+}
+.hero-text { max-width: 700px; margin: auto; }
+.hero p { margin: 14px 0 22px; }
+
+.btn {
+  display: inline-block;
+  background: #fff;
+  color: var(--primary);
+  padding: 10px 22px;
+  border: 0;
+  border-radius: 24px;
+  font-size: 1rem;
+  font-weight: bold;
+  text-decoration: none;
+  cursor: pointer;
+}
+.btn:hover { background: var(--accent); color: #fff; }
+
+/* ---------- Sections ---------- */
+.section { padding: 36px 20px; max-width: 1200px; margin: auto; }
+.alt { background: var(--light); max-width: none; }
+.alt > * { max-width: 1160px; margin-left: auto; margin-right: auto; }
+
+/* ---------- About: columns (1 column on mobile) ---------- */
+.two-col { display: flex; flex-direction: column; gap: 20px; }
+.col { background: var(--light); padding: 18px; border-radius: 8px; }
+
+/* ---------- Cards (1 column on mobile) ---------- */
+.cards { display: grid; grid-template-columns: 1fr; gap: 16px; }
+.card {
+  background: #fff;
+  padding: 22px;
+  border-radius: 10px;
+  text-align: center;
+  box-shadow: 0 2px 6px rgba(0,0,0,.12);
+  transition: transform .3s;
+}
+.card:hover { transform: translateY(-6px); }
+.icon { font-size: 2.2rem; margin-bottom: 8px; }
+
+/* ---------- Gallery (1 column on mobile) ---------- */
+.gallery { display: grid; grid-template-columns: 1fr; gap: 12px; margin: 14px 0 22px; }
+.gallery img { width: 100%; border-radius: 8px; }
+
+/* ---------- Table ---------- */
+.table-wrap { overflow-x: auto; }               /* scroll sideways on small screens */
+table { border-collapse: collapse; width: 100%; min-width: 480px; background: #fff; }
+th, td { border: 1px solid #bbb; padding: 10px; text-align: left; }
+th { background: var(--primary); color: #fff; }
+tbody tr:nth-child(even) { background: #f0f0f0; }
+
+/* ---------- Form ---------- */
+.form { max-width: 700px; }
+.form-row { display: flex; flex-direction: column; gap: 0; }
+.field { margin-bottom: 14px; flex: 1; }
+.field label { display: block; font-weight: bold; margin-bottom: 4px; }
+.field input, .field textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #999;
+  border-radius: 6px;
+  font: inherit;
+}
+.field input:focus, .field textarea:focus { outline: 2px solid var(--accent); }
+.form .btn { background: var(--primary); color: #fff; }
+.form .btn:hover { background: var(--accent); }
+
+/* ---------- Footer ---------- */
+.site-footer { background: var(--primary); color: #fff; padding: 30px 20px 14px; }
+.footer-cols { display: grid; grid-template-columns: 1fr; gap: 18px; max-width: 1160px; margin: auto; }
+.site-footer h4 { margin-bottom: 6px; color: #9ad1ff; }
+.site-footer a { color: #fff; }
+.copy { text-align: center; margin-top: 20px; font-size: .9rem; border-top: 1px solid rgba(255,255,255,.2); padding-top: 12px; }
+
+
+/* ==========================================================
+   MEDIA QUERIES  (min-width = mobile first)
+   ========================================================== */
+
+/* ---------- Tablet: 601px and above ---------- */
+@media (min-width: 601px) {
+  h1 { font-size: 2.3rem; }
+  .hero { padding: 70px 30px; }
+
+  .two-col { flex-direction: row; }
+  .col { flex: 1; }
+
+  .cards { grid-template-columns: repeat(2, 1fr); }      /* 2 columns */
+  .gallery { grid-template-columns: repeat(2, 1fr); }
+  .form-row { flex-direction: row; gap: 16px; }
+  .footer-cols { grid-template-columns: repeat(2, 1fr); }
+}
+
+/* ---------- Laptop: 901px and above ---------- */
+@media (min-width: 901px) {
+  /* Full menu in a row, hamburger hidden */
+  .menu-icon { display: none; }
+  .nav { display: flex; flex-direction: row; width: auto; margin-top: 0; }
+  .nav a { border-top: 0; padding: 8px 14px; }
+
+  h1 { font-size: 2.8rem; }
+  .hero { padding: 100px 40px; }
+
+  .cards { grid-template-columns: repeat(4, 1fr); }      /* 4 columns */
+  .gallery { grid-template-columns: repeat(3, 1fr); }
+  .footer-cols { grid-template-columns: repeat(3, 1fr); }
+}
+
+/* ---------- Large screens: 1200px and above ---------- */
+@media (min-width: 1200px) {
+  body { font-size: 18px; }
+  .section { padding: 56px 20px; }
+}
+
+/* ---------- Orientation and print ---------- */
+@media (orientation: landscape) and (max-height: 500px) {
+  .hero { padding: 30px 20px; }                          /* phone held sideways */
+}
+
+@media print {
+  .site-header, .menu-icon, .btn { display: none; }
+  body { color: #000; }
+}

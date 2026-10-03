@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <!-- Viewport meta tag: the key to responsive design -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Experiment 3 - Responsive Web Page</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ============ HEADER WITH RESPONSIVE NAVIGATION ============ -->
+  <header class="site-header">
+    <a href="#home" class="logo">MyResponsive<span>Site</span></a>
+
+    <!-- Checkbox hack: toggles the menu on small screens without JavaScript -->
+    <input type="checkbox" id="menu-toggle">
+    <label for="menu-toggle" class="menu-icon" aria-label="Toggle menu">&#9776;</label>
+
+    <nav class="nav">
+      <a href="#home">Home</a>
+      <a href="#about">About</a>
+      <a href="#services">Services</a>
+      <a href="#gallery">Gallery</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+
+  <!-- ============ HERO SECTION ============ -->
+  <section class="hero" id="home">
+    <div class="hero-text">
+      <h1>A Page That Fits Every Screen</h1>
+      <p>Resize your browser window or open this page on a phone, tablet and laptop to see the layout adapt.</p>
+      <a href="#contact" class="btn">Get in Touch</a>
+    </div>
+  </section>
+
+  <main>
+
+    <!-- ============ ABOUT: TWO COLUMNS THAT STACK ============ -->
+    <section id="about" class="section">
+      <h2>About Responsive Design</h2>
+      <div class="two-col">
+        <div class="col">
+          <h3>What is it?</h3>
+          <p>Responsive web design makes a page look good on all devices by changing the layout according to the screen width. It uses a flexible grid, flexible images and media queries.</p>
+        </div>
+        <div class="col">
+          <h3>Why is it needed?</h3>
+          <p>People browse on phones, tablets, laptops and large monitors. A single responsive page works on all of them, so there is no need for a separate mobile website.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ SERVICES: CARDS (4 -> 2 -> 1 columns) ============ -->
+    <section id="services" class="section alt">
+      <h2>Our Services</h2>
+      <div class="cards">
+        <div class="card">
+          <div class="icon">&#128187;</div>
+          <h3>Web Design</h3>
+          <p>Clean and modern layouts for every device.</p>
+        </div>
+        <div class="card">
+          <div class="icon">&#128241;</div>
+          <h3>Mobile First</h3>
+          <p>Designed for small screens first, then enlarged.</p>
+        </div>
+        <div class="card">
+          <div class="icon">&#9889;</div>
+          <h3>Fast Loading</h3>
+          <p>Lightweight pages that open quickly.</p>
+        </div>
+        <div class="card">
+          <div class="icon">&#128274;</div>
+          <h3>Accessible</h3>
+          <p>Readable and usable by everyone.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ GALLERY: RESPONSIVE IMAGES ============ -->
+    <section id="gallery" class="section">
+      <h2>Responsive Images</h2>
+      <p>The images below use <code>max-width: 100%</code>, so they shrink with their container and never overflow.</p>
+      <div class="gallery">
+        <img alt="Blue sample image"
+          src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='400' height='260'><rect width='400' height='260' fill='%233498db'/><text x='200' y='140' font-size='28' fill='white' text-anchor='middle'>Image 1</text></svg>">
+        <img alt="Green sample image"
+          src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='400' height='260'><rect width='400' height='260' fill='%2327ae60'/><text x='200' y='140' font-size='28' fill='white' text-anchor='middle'>Image 2</text></svg>">
+        <img alt="Orange sample image"
+          src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='400' height='260'><rect width='400' height='260' fill='%23e67e22'/><text x='200' y='140' font-size='28' fill='white' text-anchor='middle'>Image 3</text></svg>">
+      </div>
+
+      <h3>Different image for different screens (picture element)</h3>
+      <picture>
+        <source media="(min-width: 900px)"
+          srcset="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='900' height='200'><rect width='900' height='200' fill='%238e44ad'/><text x='450' y='115' font-size='30' fill='white' text-anchor='middle'>Wide image (screen 900px and above)</text></svg>">
+        <img class="fluid" alt="Responsive banner"
+          src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='400' height='200'><rect width='400' height='200' fill='%23c0392b'/><text x='200' y='115' font-size='22' fill='white' text-anchor='middle'>Small image (below 900px)</text></svg>">
+      </picture>
+    </section>
+
+    <!-- ============ RESPONSIVE TABLE ============ -->
+    <section class="section alt">
+      <h2>Responsive Table</h2>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Device</th><th>Screen Width</th><th>Layout Used</th><th>Columns</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Mobile</td><td>Up to 600px</td><td>Single column</td><td>1</td></tr>
+            <tr><td>Tablet</td><td>601px to 900px</td><td>Two columns</td><td>2</td></tr>
+            <tr><td>Laptop</td><td>901px to 1200px</td><td>Four cards</td><td>4</td></tr>
+            <tr><td>Large desktop</td><td>Above 1200px</td><td>Centred wide layout</td><td>4</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ============ CONTACT FORM ============ -->
+    <section id="contact" class="section">
+      <h2>Contact Us</h2>
+      <form class="form" action="#" method="post">
+        <div class="form-row">
+          <div class="field">
+            <label for="name">Name</label>
+            <input type="text" id="name" name="name" placeholder="Your name" required>
+          </div>
+          <div class="field">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" placeholder="you@example.com" required>
+          </div>
+        </div>
+        <div class="field">
+          <label for="msg">Message</label>
+          <textarea id="msg" name="msg" rows="5" placeholder="Write your message"></textarea>
+        </div>
+        <button type="submit" class="btn">Send Message</button>
+      </form>
+    </section>
+
+  </main>
+
+  <!-- ============ FOOTER: 3 COLUMNS THAT STACK ============ -->
+  <footer class="site-footer">
+    <div class="footer-cols">
+      <div>
+        <h4>About</h4>
+        <p>Experiment 3: a responsive page built using only HTML and CSS.</p>
+      </div>
+      <div>
+        <h4>Quick Links</h4>
+        <p><a href="#home">Home</a></p>
+        <p><a href="#services">Services</a></p>
+        <p><a href="#contact">Contact</a></p>
+      </div>
+      <div>
+        <h4>Screen Info</h4>
+        <p id="screen-info">Resize the window to see the width.</p>
+      </div>
+    </div>
+    <p class="copy">&copy; 2026 Sakshi | Experiment 3: Responsive Web Page</p>
+  </footer>
+
+  <!-- Small script only to display the current width (not needed for the layout) -->
+  <script>
+    function showWidth() {
+      document.getElementById("screen-info").textContent =
+        "Current width: " + window.innerWidth + "px";
+    }
+    showWidth();
+    window.addEventListener("resize", showWidth);
+  </script>
+</body>
+</html>

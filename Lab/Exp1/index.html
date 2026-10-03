@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="A web page demonstrating all possible elements of HTML5">
+  <meta name="author" content="Sakshi">
+  <meta name="keywords" content="HTML5, elements, lab, experiment 1">
+  <base target="_self">
+  <title>Experiment 1 - All HTML5 Elements</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 0; line-height: 1.6; background: #f7f8fa; color: #222; }
+    header, footer { background: #2c3e50; color: #fff; padding: 14px 24px; }
+    nav a { color: #9ad1ff; margin-right: 14px; }
+    main { max-width: 960px; margin: auto; padding: 16px 24px; }
+    section { background: #fff; padding: 12px 20px; margin: 16px 0; border-radius: 8px; box-shadow: 0 1px 3px rgba(0,0,0,.1); }
+    table, th, td { border: 1px solid #888; border-collapse: collapse; padding: 6px 10px; }
+    aside { background: #fff7d6; padding: 10px 16px; border-left: 4px solid #e0b400; }
+    canvas, svg { border: 1px solid #ccc; }
+    label { display: inline-block; min-width: 150px; margin: 4px 0; }
+  </style>
+</head>
+<body>
+
+  <!-- ============ HEADER & NAVIGATION ============ -->
+  <header>
+    <h1>HTML5 Elements Demo</h1>
+    <p>Experiment 1: Create a web page with all possible elements of HTML5</p>
+    <nav>
+      <a href="#text">Text</a>
+      <a href="#lists">Lists</a>
+      <a href="#tables">Tables</a>
+      <a href="#media">Media</a>
+      <a href="#graphics">Graphics</a>
+      <a href="#forms">Forms</a>
+      <a href="#interactive">Interactive</a>
+    </nav>
+  </header>
+
+  <main>
+
+    <!-- ============ 1. TEXT ============ -->
+    <section id="text">
+      <h2>1. Headings and Text Formatting</h2>
+      <h1>Heading 1</h1>
+      <h2>Heading 2</h2>
+      <h3>Heading 3</h3>
+      <h4>Heading 4</h4>
+      <h5>Heading 5</h5>
+      <h6>Heading 6</h6>
+      <hr>
+
+      <p>This is a paragraph with <b>bold</b>, <strong>strong</strong>, <i>italic</i>, <em>emphasised</em>,
+        <u>underlined</u>, <mark>highlighted</mark>, <small>small</small>, <del>deleted</del>,
+        <ins>inserted</ins>, <s>strikethrough</s>, H<sub>2</sub>O (subscript) and x<sup>2</sup> (superscript).</p>
+
+      <p>Line one<br>Line two after a line break. A long word can break here: Super<wbr>cali<wbr>fragilistic.</p>
+
+      <p>Computer text: <code>console.log("Hello")</code>, keyboard <kbd>Ctrl</kbd> + <kbd>S</kbd>,
+        sample output <samp>File saved</samp>, variable <var>x</var>.</p>
+
+      <p><abbr title="HyperText Markup Language">HTML</abbr> is the standard markup language.
+        <dfn>Markup</dfn> describes the structure of content. Quote: <q>Simplicity is the ultimate sophistication.</q>
+        Book: <cite>HTML5 Guide</cite>.</p>
+
+      <p>Date: <time datetime="2026-10-03">3 October 2026</time>.
+        Product code: <data value="1234">Item 1234</data>.
+        Bi-directional text: <bdo dir="rtl">This text is reversed</bdo>, <bdi>مرحبا</bdi>.</p>
+
+      <p>Ruby annotation: <ruby>漢<rp>(</rp><rt>kan</rt><rp>)</rp></ruby></p>
+
+      <blockquote cite="https://www.w3.org">
+        HTML5 is a markup language used for structuring and presenting content on the web.
+      </blockquote>
+
+      <pre>
+Preformatted text keeps
+    spaces and line breaks
+        exactly as typed.
+      </pre>
+
+      <address>
+        Written by Sakshi<br>
+        <a href="mailto:sakshi@example.com">sakshi@example.com</a><br>
+        Meerut, Uttar Pradesh, India
+      </address>
+    </section>
+
+    <!-- ============ 2. ARTICLE, ASIDE, FIGURE ============ -->
+    <section id="semantic">
+      <h2>2. Semantic Elements</h2>
+      <article>
+        <header><h3>Article: What is HTML5?</h3></header>
+        <p>HTML5 introduced semantic tags, audio, video, canvas and form improvements.</p>
+        <footer><small>Posted on <time datetime="2026-10-03">3 Oct 2026</time></small></footer>
+      </article>
+
+      <aside>
+        <h4>Aside</h4>
+        <p>This is side content related to the main article.</p>
+      </aside>
+
+      <figure>
+        <img alt="Blue square sample image" width="200" height="100"
+          src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='100'><rect width='200' height='100' fill='%234a90d9'/><text x='100' y='55' font-size='18' fill='white' text-anchor='middle'>Sample Image</text></svg>">
+        <figcaption>Figure 1: An image inside figure with figcaption</figcaption>
+      </figure>
+    </section>
+
+    <!-- ============ 3. LISTS ============ -->
+    <section id="lists">
+      <h2>3. Lists and Links</h2>
+
+      <h3>Unordered list</h3>
+      <ul>
+        <li>HTML</li>
+        <li>CSS
+          <ul><li>Flexbox</li><li>Grid</li></ul>
+        </li>
+        <li>JavaScript</li>
+      </ul>
+
+      <h3>Ordered list</h3>
+      <ol type="1" start="1">
+        <li>Open editor</li>
+        <li>Write code</li>
+        <li>Run in browser</li>
+      </ol>
+
+      <h3>Description list</h3>
+      <dl>
+        <dt>HTML</dt><dd>Structure of a web page</dd>
+        <dt>CSS</dt><dd>Styling of a web page</dd>
+      </dl>
+
+      <h3>Links</h3>
+      <p>
+        <a href="https://www.w3.org" target="_blank" rel="noopener">External link</a> |
+        <a href="#forms">Internal link to forms</a> |
+        <a href="mailto:sakshi@example.com">Email link</a> |
+        <a href="tel:+911234567890">Phone link</a>
+      </p>
+      <menu>
+        <li><a href="#text">Menu item 1</a></li>
+        <li><a href="#tables">Menu item 2</a></li>
+      </menu>
+    </section>
+
+    <!-- ============ 4. TABLES ============ -->
+    <section id="tables">
+      <h2>4. Table</h2>
+      <table>
+        <caption>Student Marks</caption>
+        <colgroup>
+          <col style="background:#eef">
+          <col span="2">
+        </colgroup>
+        <thead>
+          <tr><th>Name</th><th>Subject</th><th>Marks</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Rahul</td><td>Backend</td><td>28</td></tr>
+          <tr><td>Priya</td><td>Backend</td><td>27</td></tr>
+          <tr><td colspan="2">Merged two columns</td><td>--</td></tr>
+          <tr><td rowspan="2">Amit</td><td>HTML</td><td>25</td></tr>
+          <tr><td>CSS</td><td>26</td></tr>
+        </tbody>
+        <tfoot>
+          <tr><th colspan="2">Total students</th><th>3</th></tr>
+        </tfoot>
+      </table>
+    </section>
+
+    <!-- ============ 5. MEDIA ============ -->
+    <section id="media">
+      <h2>5. Multimedia (needs internet for audio/video files)</h2>
+
+      <h3>Image with picture and source</h3>
+      <picture>
+        <source media="(min-width: 600px)"
+          srcset="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='300' height='100'><rect width='300' height='100' fill='%2327ae60'/><text x='150' y='55' font-size='18' fill='white' text-anchor='middle'>Large Screen Image</text></svg>">
+        <img alt="Responsive picture" width="200" height="100"
+          src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='100'><rect width='200' height='100' fill='%23e67e22'/><text x='100' y='55' font-size='16' fill='white' text-anchor='middle'>Small Screen Image</text></svg>">
+      </picture>
+
+      <h3>Image map</h3>
+      <img usemap="#shapes" alt="Image map with two clickable areas" width="220" height="100"
+        src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='100'><rect x='0' y='0' width='100' height='100' fill='%23c0392b'/><circle cx='160' cy='50' r='45' fill='%232980b9'/></svg>">
+      <map name="shapes">
+        <area shape="rect" coords="0,0,100,100" href="#text" alt="Red square">
+        <area shape="circle" coords="160,50,45" href="#forms" alt="Blue circle">
+      </map>
+
+      <h3>Audio</h3>
+      <audio controls>
+        <source src="https://www.w3schools.com/html/horse.ogg" type="audio/ogg">
+        <source src="https://www.w3schools.com/html/horse.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+      </audio>
+
+      <h3>Video</h3>
+      <video width="320" height="180" controls poster="">
+        <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+        <source src="https://www.w3schools.com/html/mov_bbb.ogg" type="video/ogg">
+        <track kind="subtitles" src="" srclang="en" label="English">
+        Your browser does not support the video element.
+      </video>
+
+      <h3>Iframe, embed and object</h3>
+      <iframe src="https://www.w3.org" title="W3C website" width="400" height="150"></iframe>
+      <br>
+      <embed src="https://www.w3schools.com/html/horse.mp3" type="audio/mpeg" width="300" height="40">
+      <br>
+      <object data="https://www.w3.org" type="text/html" width="400" height="120">
+        <p>Object could not be loaded.</p>
+      </object>
+    </section>
+
+    <!-- ============ 6. GRAPHICS ============ -->
+    <section id="graphics">
+      <h2>6. Graphics: Canvas and SVG</h2>
+
+      <h3>Canvas</h3>
+      <canvas id="myCanvas" width="300" height="120">Your browser does not support canvas.</canvas>
+
+      <h3>SVG</h3>
+      <svg width="300" height="120" xmlns="http://www.w3.org/2000/svg">
+        <rect x="10" y="10" width="100" height="100" fill="#3498db" />
+        <circle cx="170" cy="60" r="45" fill="#e74c3c" />
+        <polygon points="250,15 290,105 210,105" fill="#2ecc71" />
+      </svg>
+    </section>
+
+    <!-- ============ 7. FORMS ============ -->
+    <section id="forms">
+      <h2>7. Form Elements</h2>
+      <form action="#" method="post" id="demoForm">
+        <fieldset>
+          <legend>Personal Details</legend>
+
+          <label for="name">Name:</label>
+          <input type="text" id="name" name="name" placeholder="Enter name" required><br>
+
+          <label for="email">Email:</label>
+          <input type="email" id="email" name="email" placeholder="you@example.com"><br>
+
+          <label for="pass">Password:</label>
+          <input type="password" id="pass" name="pass"><br>
+
+          <label for="num">Number:</label>
+          <input type="number" id="num" name="num" min="1" max="100" value="10"><br>
+
+          <label for="tel">Phone:</label>
+          <input type="tel" id="tel" name="tel" pattern="[0-9]{10}" placeholder="10 digit number"><br>
+
+          <label for="url">Website:</label>
+          <input type="url" id="url" name="url" placeholder="https://"><br>
+
+          <label for="search">Search:</label>
+          <input type="search" id="search" name="search"><br>
+
+          <label for="dob">Date of birth:</label>
+          <input type="date" id="dob" name="dob"><br>
+
+          <label for="time">Time:</label>
+          <input type="time" id="time" name="time"><br>
+
+          <label for="dt">Date and time:</label>
+          <input type="datetime-local" id="dt" name="dt"><br>
+
+          <label for="month">Month:</label>
+          <input type="month" id="month" name="month"><br>
+
+          <label for="week">Week:</label>
+          <input type="week" id="week" name="week"><br>
+
+          <label for="color">Colour:</label>
+          <input type="color" id="color" name="color" value="#3498db"><br>
+
+          <label for="range">Range:</label>
+          <input type="range" id="range" name="range" min="0" max="100" value="40"><br>
+
+          <label for="file">File:</label>
+          <input type="file" id="file" name="file"><br>
+
+          <input type="hidden" name="secret" value="12345">
+        </fieldset>
+
+        <fieldset>
+          <legend>Choices</legend>
+
+          <p>Gender:
+            <input type="radio" id="m" name="gender" value="male"><label for="m" style="min-width:0">Male</label>
+            <input type="radio" id="f" name="gender" value="female"><label for="f" style="min-width:0">Female</label>
+          </p>
+
+          <p>Interests:
+            <input type="checkbox" id="c1" name="interest" value="html" checked><label for="c1" style="min-width:0">HTML</label>
+            <input type="checkbox" id="c2" name="interest" value="css"><label for="c2" style="min-width:0">CSS</label>
+            <input type="checkbox" id="c3" name="interest" value="js"><label for="c3" style="min-width:0">JavaScript</label>
+          </p>
+
+          <label for="course">Course:</label>
+          <select id="course" name="course">
+            <optgroup label="Engineering">
+              <option value="cse">CSE</option>
+              <option value="it">IT</option>
+            </optgroup>
+            <optgroup label="Science">
+              <option value="phy">Physics</option>
+              <option value="chem">Chemistry</option>
+            </optgroup>
+          </select><br>
+
+          <label for="browser">Favourite browser:</label>
+          <input list="browsers" id="browser" name="browser">
+          <datalist id="browsers">
+            <option value="Chrome">
+            <option value="Firefox">
+            <option value="Edge">
+            <option value="Safari">
+          </datalist><br>
+
+          <label for="msg">Message:</label><br>
+          <textarea id="msg" name="msg" rows="4" cols="40" placeholder="Write something..."></textarea>
+        </fieldset>
+
+        <fieldset>
+          <legend>Calculation (output element)</legend>
+          <input type="number" id="a" value="5"> +
+          <input type="number" id="b" value="7"> =
+          <output name="result" for="a b" id="result">12</output>
+        </fieldset>
+
+        <p>
+          Progress: <progress value="70" max="100">70%</progress>
+          Meter: <meter value="0.6" min="0" max="1" low="0.3" high="0.8" optimum="1">60%</meter>
+        </p>
+
+        <button type="submit">Submit</button>
+        <button type="reset">Reset</button>
+        <button type="button" onclick="calc()">Calculate</button>
+        <input type="submit" value="Input Submit">
+      </form>
+    </section>
+
+    <!-- ============ 8. INTERACTIVE ============ -->
+    <section id="interactive">
+      <h2>8. Interactive Elements</h2>
+
+      <details>
+        <summary>Click to expand (details and summary)</summary>
+        <p>This hidden text appears when you click the summary.</p>
+      </details>
+
+      <p><button type="button" id="openDialog">Open dialog</button></p>
+      <dialog id="myDialog">
+        <p>This is a dialog box.</p>
+        <button type="button" id="closeDialog">Close</button>
+      </dialog>
+
+      <template id="cardTemplate">
+        <div style="border:1px solid #999; padding:8px; margin-top:6px;">Content created from a template element</div>
+      </template>
+      <p><button type="button" id="useTemplate">Use template</button></p>
+      <div id="templateTarget"></div>
+
+      <noscript>JavaScript is disabled in your browser.</noscript>
+    </section>
+
+  </main>
+
+  <!-- ============ FOOTER ============ -->
+  <footer>
+    <p>&copy; 2026 Sakshi | Experiment 1: HTML5 Elements | <small>Backend and Web Technology Lab</small></p>
+  </footer>
+
+  <!-- ============ SCRIPT ============ -->
+  <script>
+    // Canvas drawing
+    var ctx = document.getElementById("myCanvas").getContext("2d");
+    ctx.fillStyle = "#8e44ad";
+    ctx.fillRect(10, 10, 100, 100);
+    ctx.beginPath();
+    ctx.arc(190, 60, 45, 0, 2 * Math.PI);
+    ctx.fillStyle = "#f39c12";
+    ctx.fill();
+
+    // Output element calculation
+    function calc() {
+      var a = Number(document.getElementById("a").value);
+      var b = Number(document.getElementById("b").value);
+      document.getElementById("result").value = a + b;
+    }
+
+    // Dialog
+    var dlg = document.getElementById("myDialog");
+    document.getElementById("openDialog").onclick = function () { dlg.showModal(); };
+    document.getElementById("closeDialog").onclick = function () { dlg.close(); };
+
+    // Template
+    document.getElementById("useTemplate").onclick = function () {
+      var t = document.getElementById("cardTemplate");
+      document.getElementById("templateTarget").appendChild(t.content.cloneNode(true));
+    };
+  </script>
+</body>
+</html>

@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Notes App</title>
+<style>
+  :root { --bg:#f1f3f6; --card:#ffffff; --text:#1c2430; --muted:#6b7585; --line:#d8dde5; --accent:#2f5bea; --danger:#c0392b; --done:#2e8b57; }
+  body.dark { --bg:#12171e; --card:#1a212b; --text:#e6eaf0; --muted:#94a0af; --line:#2d3746; --accent:#7c9bff; --danger:#ff7b6b; --done:#5fcf94; }
+  * { box-sizing: border-box; }
+  body { margin:0; background:var(--bg); color:var(--text); font-family:"Segoe UI", system-ui, Arial, sans-serif; }
+  .container { max-width:640px; margin:0 auto; padding:24px 16px 48px; }
+  .top { display:flex; justify-content:space-between; align-items:center; }
+  h1 { margin:0 0 4px; }
+  .sub { color:var(--muted); margin:0 0 18px; font-size:14px; }
+  input[type="text"] { width:100%; padding:10px 12px; border:1px solid var(--line); border-radius:8px; background:var(--card); color:var(--text); font-size:15px; }
+  button { cursor:pointer; padding:8px 14px; border:1px solid var(--line); border-radius:8px; background:var(--card); color:var(--text); font-size:14px; }
+  button:hover { border-color:var(--accent); }
+  .add-row { display:flex; gap:8px; }
+  .add-row button { background:var(--accent); border-color:var(--accent); color:#fff; font-weight:600; white-space:nowrap; }
+  #error { color:var(--danger); font-size:14px; min-height:20px; margin:6px 0; }
+  #searchInput { margin:6px 0 14px; }
+  .note-card { background:var(--card); border:1px solid var(--line); border-left:4px solid var(--accent); border-radius:10px; padding:12px 14px; margin-bottom:10px; }
+  .note-card.completed { border-left-color:var(--done); }
+  .note-card.completed p { text-decoration:line-through; color:var(--muted); }
+  .note-card p { margin:0 0 6px; overflow-wrap:anywhere; white-space:pre-wrap; }
+  .time { font-size:12px; color:var(--muted); margin-bottom:8px; }
+  .note-card button { padding:5px 12px; font-size:13px; margin-right:6px; }
+  .del { color:var(--danger); }
+  .empty { text-align:center; color:var(--muted); padding:28px; border:1px dashed var(--line); border-radius:10px; }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <div class="top">
+    <h1>My Notes</h1>
+    <button onclick="toggleTheme()" id="themeBtn">Dark mode</button>
+  </div>
+  <p class="sub">Notes are saved in localStorage, so they stay after refresh.</p>
+
+  <!-- Step 5: HTML skeleton -->
+  <div class="add-row">
+    <input type="text" id="noteInput" placeholder="Type a note..." onkeydown="if(event.key==='Enter') addNote(this.value)">
+    <button onclick="addNote(document.getElementById('noteInput').value)">Add Note</button>
+  </div>
+  <div id="error"></div>
+
+  <input type="text" id="searchInput" placeholder="Search notes..." oninput="renderNotes()">
+
+  <div id="notesList"></div>
+</div>
+
+<script>
+  // ===== Step 1: Data structure =====
+  // Each note: { id, text, completed, createdAt, updatedAt }
+  // All notes are stored as an array in localStorage under the key "notes"
+
+  let editingId = null;   // id of the note being edited (null = none)
+
+  // ===== Step 2: Helper functions =====
+  function getNotes() {
+    try {
+      const raw = localStorage.getItem("notes");
+      return raw ? JSON.parse(raw) : [];
+    } catch (e) {
+      console.error("Parse failed:", e.message);
+      return [];
+    }
+  }
+
+  function saveNotes(notes) {
+    localStorage.setItem("notes", JSON.stringify(notes));
+  }
+
+  // Makes user text safe to put inside innerHTML
+  function escapeHTML(str) {
+    return String(str).replace(/&/g, "&amp;").replace(/</g, "&lt;")
+                      .replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+  }
+
+  function formatDate(iso) {
+    return new Date(iso).toLocaleString();
+  }
+
+  // ===== Step 3: CRUD operations =====
+
+  // CREATE
+  function addNote(text) {
+    text = text.trim();
+    if (text === "") {                         // empty text not allowed
+      document.getElementById("error").textContent = "Please type something first.";
+      return;
+    }
+    document.getElementById("error").textContent = "";
+
+    const notes = getNotes();
+    notes.push({
+      id: Date.now(),
+      text: text,
+      completed: false,
+      createdAt: new Date().toISOString(),
+      updatedAt: null
+    });
+    saveNotes(notes);
+    document.getElementById("noteInput").value = "";
+    renderNotes();
+  }
+
+  // READ  (done via getNotes)
+
+  // UPDATE
+  function updateNote(id, newText) {
+    newText = newText.trim();
+    if (newText === "") return;
+    const notes = getNotes();
+    const note = notes.find(n => n.id === id);
+    if (note) {
+      note.text = newText;
+      note.updatedAt = new Date().toISOString();
+      saveNotes(notes);
+    }
+    editingId = null;
+    renderNotes();
+  }
+
+  // DELETE
+  function deleteNote(id) {
+    const notes = getNotes().filter(n => n.id !== id);
+    saveNotes(notes);
+    renderNotes();
+  }
+
+  // Extra: mark complete / incomplete
+  function toggleDone(id) {
+    const notes = getNotes();
+    const note = notes.find(n => n.id === id);
+    if (note) {
+      note.completed = !note.completed;
+      saveNotes(notes);
+    }
+    renderNotes();
+  }
+
+  // Edit mode helpers
+  function editNote(id) {
+    editingId = id;
+    renderNotes();
+    const box = document.getElementById("editInput");
+    if (box) box.focus();
+  }
+
+  function saveEdit(id) {
+    updateNote(id, document.getElementById("editInput").value);
+  }
+
+  function cancelEdit() {
+    editingId = null;
+    renderNotes();
+  }
+
+  // ===== Step 4: Render to DOM =====
+  function renderNotes() {
+    const container = document.getElementById("notesList");
+    const search = document.getElementById("searchInput").value.trim().toLowerCase();
+    const allNotes = getNotes();
+    const notes = allNotes.filter(n => n.text.toLowerCase().includes(search));
+
+    if (allNotes.length === 0) {
+      container.innerHTML = '<div class="empty">No notes yet. Type one above and click Add Note.</div>';
+      return;
+    }
+    if (notes.length === 0) {
+      container.innerHTML = '<div class="empty">No notes match your search.</div>';
+      return;
+    }
+
+    container.innerHTML = notes.map(note => {
+      const time = "Created: " + formatDate(note.createdAt) +
+                   (note.updatedAt ? " | Updated: " + formatDate(note.updatedAt) : "");
+
+      if (note.id === editingId) {
+        return `
+          <div class="note-card">
+            <input type="text" id="editInput" value="${escapeHTML(note.text)}"
+                   onkeydown="if(event.key==='Enter') saveEdit(${note.id})">
+            <div class="time">${time}</div>
+            <button onclick="saveEdit(${note.id})">Save</button>
+            <button onclick="cancelEdit()">Cancel</button>
+          </div>`;
+      }
+
+      return `
+        <div class="note-card ${note.completed ? "completed" : ""}">
+          <p>${escapeHTML(note.text)}</p>
+          <div class="time">${time}</div>
+          <button onclick="toggleDone(${note.id})">${note.completed ? "Undo" : "Done"}</button>
+          <button onclick="editNote(${note.id})">Edit</button>
+          <button class="del" onclick="deleteNote(${note.id})">Delete</button>
+        </div>`;
+    }).join("");
+  }
+
+  // ===== Extra: dark / light mode (saved) =====
+  function toggleTheme() {
+    document.body.classList.toggle("dark");
+    const isDark = document.body.classList.contains("dark");
+    localStorage.setItem("theme", isDark ? "dark" : "light");
+    document.getElementById("themeBtn").textContent = isDark ? "Light mode" : "Dark mode";
+  }
+
+  function loadTheme() {
+    if (localStorage.getItem("theme") === "dark") {
+      document.body.classList.add("dark");
+      document.getElementById("themeBtn").textContent = "Light mode";
+    }
+  }
+
+  // Load saved notes and theme when the page opens
+  window.onload = function () {
+    loadTheme();
+    renderNotes();
+  };
+</script>
+</body>
+</html>

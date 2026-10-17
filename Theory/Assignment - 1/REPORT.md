@@ -207,3 +207,4 @@ The Notes App meets all the compulsory requirements of Assignment 01. It adds, d
 1. Tutorial: Web Storage API Tutorial, https://upessocs.github.io/Lectures/Backend%20Development/Theory/Unit%201/L07%20LocalStorage%20SessionStorage%20and%20JSON/
 2. MDN Web Docs: Web Storage API, https://developer.mozilla.org/en-US/docs/Web/API/Web_Storage_API
 3. MDN Web Docs: JSON.stringify() and JSON.parse(), https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON
+

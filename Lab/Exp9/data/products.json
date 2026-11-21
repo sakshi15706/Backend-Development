@@ -1,0 +1,10 @@
+[
+    { "id": 1, "name": "Wireless Mouse",    "category": "accessory", "price": 1299,   "rating": 4.3, "inStock": true },
+    { "id": 2, "name": "Mechanical Keyboard","category": "accessory", "price": 3499,   "rating": 4.6, "inStock": true },
+    { "id": 3, "name": "USB-C Hub",          "category": "accessory", "price": 1899,   "rating": 4.1, "inStock": false },
+    { "id": 4, "name": "ThinkPad X1",        "category": "laptop",    "price": 125000, "rating": 4.7, "inStock": true },
+    { "id": 5, "name": "MacBook Air",        "category": "laptop",    "price": 99000,  "rating": 4.8, "inStock": true },
+    { "id": 6, "name": "Clean Code",         "category": "book",      "price": 499,    "rating": 4.8, "inStock": true },
+    { "id": 7, "name": "The Pragmatic Programmer", "category": "book","price": 650,    "rating": 4.7, "inStock": false },
+    { "id": 8, "name": "Eloquent JavaScript","category": "book",      "price": 799,    "rating": 4.5, "inStock": true }
+]

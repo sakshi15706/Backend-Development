@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AJAX with HTML, XML and JSON</title>
+<style>
+  :root {
+    --bg:#eef1f6; --card:#ffffff; --ink:#1c2430; --muted:#6b7585; --line:#d4dae3;
+    --accent:#3b5bdb; --accent-soft:#e7ecff; --ok:#2f9e66; --bad:#d63a4a; --log:#0f1620; --log-ink:#b8f3cf;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg:#12171e; --card:#1a212b; --ink:#e6eaf0; --muted:#94a0af; --line:#2d3746;
+            --accent:#7c9bff; --accent-soft:#222c4a; --ok:#5fcf94; --bad:#ff7b6b; --log:#0b0f15; --log-ink:#9be8bb; }
+  }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--bg); color:var(--ink); font-family:"Segoe UI", system-ui, -apple-system, Roboto, Arial, sans-serif; line-height:1.5; }
+  header { max-width:860px; margin:0 auto; padding:1.5rem 1rem 0; }
+  h1 { margin:0; font-size:1.7rem; }
+  .sub { color:var(--muted); margin:.2rem 0 .8rem; }
+  nav { position:sticky; top:0; background:var(--bg); padding:.6rem 1rem; max-width:860px; margin:0 auto; display:flex; gap:.4rem; flex-wrap:wrap; z-index:5; }
+  nav a { text-decoration:none; color:var(--accent); background:var(--accent-soft); padding:.25rem .7rem; border-radius:999px; font-size:.88rem; }
+  main { max-width:860px; margin:0 auto; padding:0 1rem 3rem; }
+  section { background:var(--card); border:1px solid var(--line); border-radius:14px; padding:1.25rem 1.4rem; margin-top:1.1rem; scroll-margin-top:3.5rem; }
+  h2 { margin:0 0 .2rem; font-size:1.2rem; }
+  .what { color:var(--muted); font-size:.9rem; margin:0 0 .9rem; }
+  .row { display:flex; gap:.5rem; flex-wrap:wrap; align-items:center; margin:.6rem 0; }
+  button, input[type="text"], select { font:inherit; color:var(--ink); background:var(--card); border:1.5px solid var(--line); border-radius:8px; padding:.4rem .75rem; }
+  button { cursor:pointer; background:var(--accent); border-color:var(--accent); color:#fff; }
+  button.alt { background:var(--card); color:var(--ink); border-color:var(--line); }
+  button:hover { filter:brightness(1.08); }
+  button:disabled { opacity:.6; cursor:wait; }
+  :focus-visible { outline:2px solid var(--accent); outline-offset:2px; }
+  .log { list-style:none; margin:.8rem 0 0; padding:.6rem .8rem; background:var(--log); color:var(--log-ink); border-radius:8px; font:.82rem/1.5 Consolas,"Courier New",monospace; min-height:3rem; }
+  .log li { padding:.05rem 0; overflow-wrap:anywhere; }
+  .log li:not(:first-child) { opacity:.65; }
+  .log li.empty { opacity:.5; }
+  .out { margin-top:.8rem; padding:.9rem 1rem; border:1px dashed var(--line); border-radius:10px; min-height:3.5rem; }
+  .out.error { border-color:var(--bad); color:var(--bad); }
+  .out h3 { margin-top:0; }
+  table { border-collapse:collapse; width:100%; font-size:.92rem; }
+  th, td { text-align:left; padding:.45rem .6rem; border-bottom:1px solid var(--line); }
+  th { color:var(--muted); font-weight:600; }
+  .cards { display:grid; grid-template-columns:repeat(auto-fill,minmax(190px,1fr)); gap:.7rem; }
+  .pcard { border:1px solid var(--line); border-radius:10px; padding:.7rem .85rem; }
+  .pcard h4 { margin:0 0 .15rem; font-size:1rem; }
+  .pcard .cat { color:var(--muted); font-size:.8rem; text-transform:capitalize; }
+  .pcard .price { font-weight:700; margin:.3rem 0; }
+  .badge { display:inline-block; font-size:.75rem; padding:.05rem .5rem; border-radius:999px; border:1px solid; }
+  .badge.in { color:var(--ok); border-color:var(--ok); }
+  .badge.out-of { color:var(--bad); border-color:var(--bad); }
+  pre { margin:0; white-space:pre-wrap; overflow-wrap:anywhere; font:.85rem/1.5 Consolas,"Courier New",monospace; }
+  .form-row { display:grid; grid-template-columns:1fr 2fr auto; gap:.5rem; margin:.6rem 0; }
+  @media (max-width:600px) { .form-row { grid-template-columns:1fr; } }
+  code { background:var(--accent-soft); padding:.05rem .35rem; border-radius:4px; font-size:.88em; }
+  .note { background:var(--accent-soft); border-radius:10px; padding:.6rem .9rem; font-size:.88rem; margin:.2rem 0 0; }
+</style>
+</head>
+<body>
+<header>
+  <h1>AJAX with HTML, XML and JSON</h1>
+  <p class="sub">Five programs. Each one requests data from the server without reloading the page.</p>
+  <p class="note" id="serverWarning" hidden>This page was opened as a file. AJAX does not work that way. Start the server with <code>node server.js</code> and open <code>http://localhost:3000</code>.</p>
+</header>
+<nav aria-label="Programs">
+  <a href="#p1">1 HTML</a>
+  <a href="#p2">2 XML</a>
+  <a href="#p3">3 JSON</a>
+  <a href="#p4">4 Send JSON</a>
+  <a href="#p5">5 Readystate</a>
+</nav>
+
+<main>
+
+  <!-- ===== Program 1: HTML ===== -->
+  <section id="p1">
+    <h2>Program 1: AJAX with HTML data (XMLHttpRequest)</h2>
+    <p class="what">Loads <code>partials/about.html</code> and inserts it into the page.</p>
+    <div class="row">
+      <button id="p1-load">Load HTML</button>
+      <button id="p1-missing" class="alt">Load a missing file (404)</button>
+      <button id="p1-clear" class="alt">Clear</button>
+    </div>
+    <div class="out" id="out1">Nothing loaded yet.</div>
+    <ul class="log" id="log1"></ul>
+  </section>
+
+  <!-- ===== Program 2: XML ===== -->
+  <section id="p2">
+    <h2>Program 2: AJAX with XML data (XMLHttpRequest)</h2>
+    <p class="what">Loads <code>data/students.xml</code>, reads it with the XML DOM and builds a table.</p>
+    <div class="row">
+      <button id="p2-load">Load XML</button>
+      <button id="p2-clear" class="alt">Clear</button>
+    </div>
+    <div class="out" id="out2">Nothing loaded yet.</div>
+    <ul class="log" id="log2"></ul>
+  </section>
+
+  <!-- ===== Program 3: JSON ===== -->
+  <section id="p3">
+    <h2>Program 3: AJAX with JSON data (fetch and XMLHttpRequest)</h2>
+    <p class="what">Loads <code>data/products.json</code>, then filters and sorts it in the browser.</p>
+    <div class="row">
+      <button id="p3-fetch">Load with fetch()</button>
+      <button id="p3-xhr" class="alt">Load with XMLHttpRequest</button>
+      <select id="p3-category" aria-label="Filter by category" disabled>
+        <option value="all">All categories</option>
+      </select>
+      <select id="p3-sort" aria-label="Sort products" disabled>
+        <option value="id">Original order</option>
+        <option value="price-asc">Price: low to high</option>
+        <option value="price-desc">Price: high to low</option>
+        <option value="rating">Best rated</option>
+      </select>
+    </div>
+    <div class="out" id="out3">Nothing loaded yet.</div>
+    <ul class="log" id="log3"></ul>
+  </section>
+
+  <!-- ===== Program 4: POST JSON ===== -->
+  <section id="p4">
+    <h2>Program 4: Sending JSON to the server (POST)</h2>
+    <p class="what">Sends a JSON object to <code>/api/echo</code> and shows the JSON reply. Needs <code>node server.js</code>.</p>
+    <div class="form-row">
+      <input type="text" id="p4-name" placeholder="Your name" maxlength="40" aria-label="Your name">
+      <input type="text" id="p4-message" placeholder="Message" maxlength="200" aria-label="Message">
+      <button id="p4-send">Send</button>
+    </div>
+    <div class="out" id="out4">No request sent yet.</div>
+    <ul class="log" id="log4"></ul>
+  </section>
+
+  <!-- ===== Program 5: readyState ===== -->
+  <section id="p5">
+    <h2>Program 5: Watching an XMLHttpRequest step by step</h2>
+    <p class="what">Shows every <code>readyState</code> change and the status code of the request.</p>
+    <div class="row">
+      <select id="p5-url" aria-label="Choose a file">
+        <option value="data/products.json">data/products.json (200 OK)</option>
+        <option value="data/students.xml">data/students.xml (200 OK)</option>
+        <option value="data/nothing.json">data/nothing.json (404 Not Found)</option>
+      </select>
+      <button id="p5-go">Send request</button>
+    </div>
+    <ul class="log" id="log5"></ul>
+    <table style="margin-top:.8rem;">
+      <thead><tr><th>readyState</th><th>Name</th><th>Meaning</th></tr></thead>
+      <tbody>
+        <tr><td>0</td><td>UNSENT</td><td>Request object created</td></tr>
+        <tr><td>1</td><td>OPENED</td><td><code>open()</code> has been called</td></tr>
+        <tr><td>2</td><td>HEADERS_RECEIVED</td><td>Response headers have arrived</td></tr>
+        <tr><td>3</td><td>LOADING</td><td>Body is being downloaded</td></tr>
+        <tr><td>4</td><td>DONE</td><td>Request finished (check <code>status</code>)</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+</main>
+
+<script>
+  // ---------- Shared helpers ----------
+  if (location.protocol === "file:") document.getElementById("serverWarning").hidden = false;
+
+  const $ = (id) => document.getElementById(id);
+
+  function log(id, message) {
+    const box = $(id);
+    const empty = box.querySelector(".empty");
+    if (empty) empty.remove();
+    const li = document.createElement("li");
+    li.textContent = message;                 // textContent keeps data from the server safe
+    box.prepend(li);
+    while (box.children.length > 8) box.lastElementChild.remove();
+  }
+  document.querySelectorAll(".log").forEach((l) => {
+    const li = document.createElement("li");
+    li.className = "empty";
+    li.textContent = "Output appears here...";
+    l.appendChild(li);
+  });
+
+  function showError(outId, message) {
+    const out = $(outId);
+    out.classList.add("error");
+    out.textContent = message;
+  }
+  function clearOut(outId, text) {
+    const out = $(outId);
+    out.classList.remove("error");
+    out.textContent = text;
+  }
+
+  // ================= Program 1: HTML with XMLHttpRequest =================
+  function loadHTML(url) {
+    const xhr = new XMLHttpRequest();
+    xhr.open("GET", url, true);                           // true = asynchronous
+    xhr.onload = function () {
+      log("log1", "GET " + url + " -> status " + xhr.status + " " + xhr.statusText);
+      if (xhr.status === 200) {
+        clearOut("out1", "");
+        $("out1").innerHTML = xhr.responseText;           // our own trusted file, so HTML is inserted as HTML
+      } else {
+        showError("out1", "Could not load the page (HTTP " + xhr.status + ").");
+      }
+    };
+    xhr.onerror = function () {
+      log("log1", "Network error");
+      showError("out1", "Network error. Is the server running?");
+    };
+    xhr.send();
+    log("log1", "Request sent for " + url + " (the page does not reload)");
+  }
+  $("p1-load").addEventListener("click", () => loadHTML("partials/about.html"));
+  $("p1-missing").addEventListener("click", () => loadHTML("partials/missing.html"));
+  $("p1-clear").addEventListener("click", () => { clearOut("out1", "Nothing loaded yet."); log("log1", "Cleared"); });
+
+  // ================= Program 2: XML with XMLHttpRequest =================
+  function textOf(parent, tag) {
+    const el = parent.getElementsByTagName(tag)[0];
+    return el ? el.textContent : "";
+  }
+  $("p2-load").addEventListener("click", () => {
+    const xhr = new XMLHttpRequest();
+    xhr.open("GET", "data/students.xml", true);
+    xhr.onload = function () {
+      log("log2", "GET data/students.xml -> status " + xhr.status);
+      if (xhr.status !== 200) return showError("out2", "Could not load the XML file (HTTP " + xhr.status + ").");
+
+      // responseXML is already a parsed XML document (when the server sends an XML content type)
+      let xml = xhr.responseXML;
+      if (!xml) xml = new DOMParser().parseFromString(xhr.responseText, "application/xml");
+      if (xml.getElementsByTagName("parsererror").length) return showError("out2", "The XML file is not well formed.");
+
+      const students = xml.getElementsByTagName("student");
+      log("log2", "XML parsed: " + students.length + " <student> elements found");
+
+      const table = document.createElement("table");
+      table.innerHTML = "<thead><tr><th>ID</th><th>Name</th><th>Course</th><th>Year</th><th>Marks</th></tr></thead>";
+      const tbody = document.createElement("tbody");
+      let total = 0;
+      Array.from(students).forEach((s) => {
+        const tr = document.createElement("tr");
+        [s.getAttribute("id"), textOf(s, "name"), textOf(s, "course"), textOf(s, "year"), textOf(s, "marks")].forEach((v) => {
+          const td = document.createElement("td");
+          td.textContent = v;
+          tr.appendChild(td);
+        });
+        total += Number(textOf(s, "marks"));
+        tbody.appendChild(tr);
+      });
+      table.appendChild(tbody);
+
+      const out = $("out2");
+      out.classList.remove("error");
+      out.replaceChildren(table);
+      const avg = document.createElement("p");
+      avg.textContent = "Average marks: " + (total / students.length).toFixed(1);
+      out.appendChild(avg);
+      log("log2", "Table built. Average marks = " + (total / students.length).toFixed(1));
+    };
+    xhr.onerror = () => { log("log2", "Network error"); showError("out2", "Network error. Is the server running?"); };
+    xhr.send();
+    log("log2", "Request sent for data/students.xml");
+  });
+  $("p2-clear").addEventListener("click", () => { clearOut("out2", "Nothing loaded yet."); log("log2", "Cleared"); });
+
+  // ================= Program 3: JSON with fetch and XMLHttpRequest =================
+  let products = [];
+
+  function renderProducts() {
+    const cat = $("p3-category").value;
+    const sort = $("p3-sort").value;
+    let list = products.filter((p) => cat === "all" || p.category === cat);
+    if (sort === "price-asc") list.sort((a, b) => a.price - b.price);
+    else if (sort === "price-desc") list.sort((a, b) => b.price - a.price);
+    else if (sort === "rating") list.sort((a, b) => b.rating - a.rating);
+    else list.sort((a, b) => a.id - b.id);
+
+    const wrap = document.createElement("div");
+    wrap.className = "cards";
+    list.forEach((p) => {
+      const card = document.createElement("div");
+      card.className = "pcard";
+      const h = document.createElement("h4"); h.textContent = p.name;
+      const c = document.createElement("div"); c.className = "cat"; c.textContent = p.category;
+      const pr = document.createElement("div"); pr.className = "price"; pr.textContent = "Rs. " + p.price.toLocaleString("en-IN");
+      const r = document.createElement("div"); r.textContent = "Rating: " + p.rating;
+      const b = document.createElement("span");
+      b.className = "badge " + (p.inStock ? "in" : "out-of");
+      b.textContent = p.inStock ? "In stock" : "Out of stock";
+      card.append(h, c, pr, r, b);
+      wrap.appendChild(card);
+    });
+    $("out3").classList.remove("error");
+    $("out3").replaceChildren(wrap);
+  }
+
+  function useProducts(data, how) {
+    if (!Array.isArray(data)) throw new Error("JSON is not a list of products");
+    products = data;
+    const cats = [...new Set(products.map((p) => p.category))].sort();
+    const sel = $("p3-category");
+    sel.replaceChildren();
+    const all = document.createElement("option"); all.value = "all"; all.textContent = "All categories";
+    sel.appendChild(all);
+    cats.forEach((c) => { const o = document.createElement("option"); o.value = c; o.textContent = c; sel.appendChild(o); });
+    sel.disabled = false;
+    $("p3-sort").disabled = false;
+    log("log3", how + ": " + products.length + " products loaded, categories: " + cats.join(", "));
+    renderProducts();
+  }
+
+  $("p3-fetch").addEventListener("click", async () => {
+    log("log3", "fetch('data/products.json') started");
+    try {
+      const res = await fetch("data/products.json");
+      log("log3", "response: status " + res.status + ", ok = " + res.ok + ", type = " + res.headers.get("content-type"));
+      if (!res.ok) throw new Error("HTTP " + res.status);
+      const data = await res.json();                      // parses the JSON text into JavaScript objects
+      useProducts(data, "fetch");
+    } catch (err) {
+      log("log3", "Error: " + err.message);
+      showError("out3", "Could not load products: " + err.message);
+    }
+  });
+
+  $("p3-xhr").addEventListener("click", () => {
+    const xhr = new XMLHttpRequest();
+    xhr.open("GET", "data/products.json", true);
+    xhr.onload = function () {
+      log("log3", "XHR: status " + xhr.status);
+      if (xhr.status !== 200) return showError("out3", "Could not load products (HTTP " + xhr.status + ").");
+      try {
+        useProducts(JSON.parse(xhr.responseText), "XMLHttpRequest");   // manual JSON.parse
+      } catch (err) {
+        log("log3", "JSON error: " + err.message);
+        showError("out3", "The file is not valid JSON.");
+      }
+    };
+    xhr.onerror = () => { log("log3", "Network error"); showError("out3", "Network error. Is the server running?"); };
+    xhr.send();
+  });
+  $("p3-category").addEventListener("change", renderProducts);
+  $("p3-sort").addEventListener("change", renderProducts);
+
+  // ================= Program 4: POST JSON =================
+  $("p4-send").addEventListener("click", async () => {
+    const name = $("p4-name").value.trim();
+    const message = $("p4-message").value.trim();
+    if (!name || !message) {
+      log("log4", "Please fill in both fields");
+      return showError("out4", "Name and message are both required.");
+    }
+    const btn = $("p4-send");
+    btn.disabled = true;
+    log("log4", "POST /api/echo with " + JSON.stringify({ name, message }));
+    try {
+      const res = await fetch("/api/echo", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name, message })
+      });
+      const data = await res.json();
+      log("log4", "response status " + res.status);
+      if (!res.ok) throw new Error(data.error || "HTTP " + res.status);
+      const out = $("out4");
+      out.classList.remove("error");
+      const pre = document.createElement("pre");
+      pre.textContent = JSON.stringify(data, null, 2);
+      out.replaceChildren(pre);
+    } catch (err) {
+      log("log4", "Error: " + err.message);
+      showError("out4", "Request failed: " + err.message + ". (This program needs node server.js.)");
+    } finally {
+      btn.disabled = false;
+    }
+  });
+
+  // ================= Program 5: readyState =================
+  $("p5-go").addEventListener("click", () => {
+    const url = $("p5-url").value;
+    const names = ["UNSENT", "OPENED", "HEADERS_RECEIVED", "LOADING", "DONE"];
+    const xhr = new XMLHttpRequest();
+    log("log5", "created: readyState = 0 (UNSENT)");
+    xhr.onreadystatechange = function () {
+      let line = "readyState = " + xhr.readyState + " (" + names[xhr.readyState] + ")";
+      if (xhr.readyState === 4) line += " | status = " + xhr.status + " | bytes = " + xhr.responseText.length;
+      log("log5", line);
+    };
+    xhr.open("GET", url, true);
+    xhr.send();
+  });
+</script>
+</body>
+</html>

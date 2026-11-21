@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<students>
+    <student id="1">
+        <name>Aman Verma</name>
+        <course>B.Tech CSE</course>
+        <year>2</year>
+        <marks>82</marks>
+    </student>
+    <student id="2">
+        <name>Riya Sharma</name>
+        <course>B.Tech IT</course>
+        <year>3</year>
+        <marks>91</marks>
+    </student>
+    <student id="3">
+        <name>Karan Singh</name>
+        <course>BCA</course>
+        <year>1</year>
+        <marks>67</marks>
+    </student>
+    <student id="4">
+        <name>Sakshi Jaiswal</name>
+        <course>B.Tech CSE</course>
+        <year>2</year>
+        <marks>88</marks>
+    </student>
+    <student id="5">
+        <name>Neha Rawat</name>
+        <course>MCA</course>
+        <year>1</year>
+        <marks>74</marks>
+    </student>
+</students>

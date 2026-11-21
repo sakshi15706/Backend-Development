@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Registration Form: Client-Side Validation</title>
+<style>
+  :root {
+    --bg: #eef1f6; --card: #ffffff; --ink: #1c2430; --muted: #6b7585; --line: #d4dae3;
+    --accent: #3b5bdb; --ok: #2f9e66; --bad: #d63a4a;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg:#12171e; --card:#1a212b; --ink:#e6eaf0; --muted:#94a0af; --line:#2d3746;
+            --accent:#7c9bff; --ok:#5fcf94; --bad:#ff7b6b; }
+  }
+  * { box-sizing: border-box; }
+  body { margin:0; background:var(--bg); color:var(--ink);
+         font-family:"Segoe UI", system-ui, -apple-system, Roboto, Arial, sans-serif; line-height:1.5; }
+  .wrap { max-width: 560px; margin: 0 auto; padding: 2rem 1rem 3rem; }
+  .card { background:var(--card); border:1px solid var(--line); border-radius:14px; padding:1.75rem; }
+  h1 { margin:0 0 .25rem; font-size:1.6rem; }
+  .sub { margin:0 0 1.5rem; color:var(--muted); font-size:.92rem; }
+
+  .field { margin-bottom: 1.1rem; }
+  label, .legend { display:block; font-weight:600; font-size:.92rem; margin-bottom:.3rem; }
+  .req { color: var(--bad); }
+  input[type="text"], input[type="email"], input[type="tel"], input[type="password"],
+  input[type="date"], select {
+    width:100%; padding:.6rem .75rem; font:inherit; color:var(--ink); background:var(--card);
+    border:1.5px solid var(--line); border-radius:8px;
+  }
+  input:focus, select:focus { outline:2px solid var(--accent); outline-offset:1px; }
+  .field.invalid input, .field.invalid select { border-color: var(--bad); }
+  .field.valid input, .field.valid select { border-color: var(--ok); }
+  .error { color:var(--bad); font-size:.84rem; min-height:1.2em; margin:.25rem 0 0; }
+  .hint { color:var(--muted); font-size:.8rem; margin:.25rem 0 0; }
+
+  .pw-wrap { position:relative; }
+  .pw-wrap input { padding-right: 4.5rem; }
+  .toggle { position:absolute; right:.4rem; top:50%; transform:translateY(-50%);
+            border:0; background:none; color:var(--accent); font:inherit; font-size:.85rem; cursor:pointer; padding:.3rem .5rem; }
+
+  .meter { height:6px; background:var(--line); border-radius:4px; margin-top:.5rem; overflow:hidden; }
+  .meter span { display:block; height:100%; width:0; transition:width .2s, background .2s; }
+  .meter-label { font-size:.8rem; color:var(--muted); margin:.25rem 0 0; }
+
+  .radios { display:flex; gap:1.25rem; flex-wrap:wrap; }
+  .radios label, .check label { font-weight:400; display:inline-flex; align-items:center; gap:.4rem; margin:0; }
+  .check { display:flex; align-items:flex-start; gap:.5rem; }
+
+  .actions { display:flex; gap:.6rem; margin-top:1.4rem; }
+  button.btn { font:inherit; cursor:pointer; padding:.65rem 1.2rem; border-radius:8px; border:1.5px solid var(--line);
+               background:var(--card); color:var(--ink); }
+  button.primary { background:var(--accent); border-color:var(--accent); color:#fff; font-weight:600; flex:1; }
+  button.btn:hover { filter:brightness(1.07); }
+
+  .success { text-align:center; }
+  .success h2 { color:var(--ok); margin:.2rem 0 .5rem; }
+  .summary { text-align:left; border:1px solid var(--line); border-radius:10px; margin:1rem 0; overflow:hidden; }
+  .summary div { display:flex; justify-content:space-between; gap:1rem; padding:.55rem .9rem; border-bottom:1px solid var(--line); }
+  .summary div:last-child { border-bottom:0; }
+  .summary span:first-child { color:var(--muted); }
+  [hidden] { display:none !important; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <section class="card" id="formCard">
+    <h1>Create an account</h1>
+    <p class="sub">All fields marked <span class="req">*</span> are required. Validation runs in your browser with JavaScript.</p>
+
+    <form id="regForm" novalidate>
+
+      <div class="field">
+        <label for="fullName">Full name <span class="req">*</span></label>
+        <input type="text" id="fullName" name="fullName" autocomplete="name" aria-describedby="fullName-error">
+        <p class="error" id="fullName-error"></p>
+      </div>
+
+      <div class="field">
+        <label for="email">Email <span class="req">*</span></label>
+        <input type="email" id="email" name="email" autocomplete="email" aria-describedby="email-error">
+        <p class="error" id="email-error"></p>
+      </div>
+
+      <div class="field">
+        <label for="phone">Mobile number <span class="req">*</span></label>
+        <input type="tel" id="phone" name="phone" inputmode="numeric" placeholder="10-digit number" autocomplete="tel" aria-describedby="phone-error">
+        <p class="error" id="phone-error"></p>
+      </div>
+
+      <div class="field">
+        <label for="dob">Date of birth <span class="req">*</span></label>
+        <input type="date" id="dob" name="dob" aria-describedby="dob-error">
+        <p class="error" id="dob-error"></p>
+      </div>
+
+      <div class="field" id="genderField">
+        <span class="legend">Gender <span class="req">*</span></span>
+        <div class="radios" role="radiogroup" aria-describedby="gender-error">
+          <label><input type="radio" name="gender" value="Female"> Female</label>
+          <label><input type="radio" name="gender" value="Male"> Male</label>
+          <label><input type="radio" name="gender" value="Other"> Other</label>
+        </div>
+        <p class="error" id="gender-error"></p>
+      </div>
+
+      <div class="field">
+        <label for="country">Country <span class="req">*</span></label>
+        <select id="country" name="country" aria-describedby="country-error">
+          <option value="">Select a country</option>
+          <option>India</option>
+          <option>United States</option>
+          <option>United Kingdom</option>
+          <option>Canada</option>
+          <option>Australia</option>
+        </select>
+        <p class="error" id="country-error"></p>
+      </div>
+
+      <div class="field">
+        <label for="password">Password <span class="req">*</span></label>
+        <div class="pw-wrap">
+          <input type="password" id="password" name="password" autocomplete="new-password" aria-describedby="password-error password-hint">
+          <button type="button" class="toggle" data-target="password">Show</button>
+        </div>
+        <div class="meter" aria-hidden="true"><span id="meterBar"></span></div>
+        <p class="meter-label" id="meterLabel">Strength: -</p>
+        <p class="hint" id="password-hint">At least 8 characters with uppercase, lowercase, a number and a special character.</p>
+        <p class="error" id="password-error"></p>
+      </div>
+
+      <div class="field">
+        <label for="confirmPassword">Confirm password <span class="req">*</span></label>
+        <div class="pw-wrap">
+          <input type="password" id="confirmPassword" name="confirmPassword" autocomplete="new-password" aria-describedby="confirmPassword-error">
+          <button type="button" class="toggle" data-target="confirmPassword">Show</button>
+        </div>
+        <p class="error" id="confirmPassword-error"></p>
+      </div>
+
+      <div class="field" id="termsField">
+        <div class="check">
+          <input type="checkbox" id="terms" name="terms" aria-describedby="terms-error">
+          <label for="terms">I agree to the terms and conditions <span class="req">*</span></label>
+        </div>
+        <p class="error" id="terms-error"></p>
+      </div>
+
+      <div class="actions">
+        <button type="submit" class="btn primary">Register</button>
+        <button type="reset" class="btn" id="resetBtn">Reset</button>
+      </div>
+    </form>
+  </section>
+
+  <section class="card success" id="successCard" hidden>
+    <h2>Registration successful</h2>
+    <p class="sub">All fields passed validation. Here is what you entered:</p>
+    <div class="summary" id="summary"></div>
+    <button type="button" class="btn primary" id="againBtn">Register another user</button>
+  </section>
+</div>
+
+<script>
+  // ---------- VALIDATORS START ----------
+  // Each validator returns an error message, or "" when the value is valid.
+  // "get" reads the current value of another field (used by confirmPassword).
+  const Validators = {
+    fullName(v) {
+      v = v.trim();
+      if (!v) return "Full name is required.";
+      if (v.length < 3) return "Name must be at least 3 characters.";
+      if (v.length > 50) return "Name must be 50 characters or fewer.";
+      if (!/^[A-Za-z][A-Za-z .'-]*$/.test(v)) return "Name can contain only letters and spaces.";
+      return "";
+    },
+    email(v) {
+      v = v.trim();
+      if (!v) return "Email is required.";
+      if (!/^[^\s@]+@[^\s@]+\.[A-Za-z]{2,}$/.test(v)) return "Enter a valid email, e.g. name@example.com.";
+      return "";
+    },
+    phone(v) {
+      v = v.replace(/[\s-]/g, "");
+      if (!v) return "Mobile number is required.";
+      if (!/^\d+$/.test(v)) return "Mobile number can contain digits only.";
+      if (v.length !== 10) return "Mobile number must be exactly 10 digits.";
+      if (!/^[6-9]/.test(v)) return "Mobile number must start with 6, 7, 8 or 9.";
+      return "";
+    },
+    dob(v) {
+      if (!v) return "Date of birth is required.";
+      const born = new Date(v);
+      const today = new Date();
+      if (isNaN(born)) return "Enter a valid date.";
+      if (born > today) return "Date of birth cannot be in the future.";
+      let age = today.getFullYear() - born.getFullYear();
+      const m = today.getMonth() - born.getMonth();
+      if (m < 0 || (m === 0 && today.getDate() < born.getDate())) age--;
+      if (age < 18) return "You must be at least 18 years old.";
+      if (age > 120) return "Enter a realistic date of birth.";
+      return "";
+    },
+    gender(v) { return v ? "" : "Please select a gender."; },
+    country(v) { return v ? "" : "Please select a country."; },
+    password(v) {
+      if (!v) return "Password is required.";
+      if (v.length < 8) return "Password must be at least 8 characters.";
+      if (!/[A-Z]/.test(v)) return "Add at least one uppercase letter.";
+      if (!/[a-z]/.test(v)) return "Add at least one lowercase letter.";
+      if (!/\d/.test(v)) return "Add at least one number.";
+      if (!/[^A-Za-z0-9]/.test(v)) return "Add at least one special character (e.g. @ # $ !).";
+      if (/\s/.test(v)) return "Password cannot contain spaces.";
+      return "";
+    },
+    confirmPassword(v, get) {
+      if (!v) return "Please confirm your password.";
+      if (v !== get("password")) return "Passwords do not match.";
+      return "";
+    },
+    terms(v) { return v ? "" : "You must accept the terms and conditions."; }
+  };
+
+  function passwordScore(v) {
+    let score = 0;
+    if (v.length >= 8) score++;
+    if (/[A-Z]/.test(v) && /[a-z]/.test(v)) score++;
+    if (/\d/.test(v)) score++;
+    if (/[^A-Za-z0-9]/.test(v)) score++;
+    return score; // 0 to 4
+  }
+  // ---------- VALIDATORS END ----------
+
+  const form = document.getElementById("regForm");
+  const textFields = ["fullName", "email", "phone", "dob", "country", "password", "confirmPassword"];
+  const touched = {};
+
+  // Read the current value of a field by id
+  function getValue(id) {
+    if (id === "gender") {
+      const r = form.querySelector('input[name="gender"]:checked');
+      return r ? r.value : "";
+    }
+    if (id === "terms") return document.getElementById("terms").checked;
+    return document.getElementById(id).value;
+  }
+
+  // Show or clear the message for a field
+  function setState(id, message) {
+    const err = document.getElementById(id + "-error");
+    err.textContent = message;
+    const wrapper = id === "gender" ? document.getElementById("genderField")
+                  : id === "terms" ? document.getElementById("termsField")
+                  : document.getElementById(id).closest(".field");
+    wrapper.classList.toggle("invalid", message !== "");
+    wrapper.classList.toggle("valid", message === "" && touched[id]);
+    if (id !== "gender") document.getElementById(id).setAttribute("aria-invalid", message !== "");
+  }
+
+  function validateField(id) {
+    touched[id] = true;
+    const message = Validators[id](getValue(id), getValue);
+    setState(id, message);
+    return message === "";
+  }
+
+  // Validate on blur, and re-validate while typing once the field was touched
+  textFields.forEach((id) => {
+    const el = document.getElementById(id);
+    el.addEventListener("blur", () => validateField(id));
+    el.addEventListener(el.tagName === "SELECT" ? "change" : "input", () => {
+      if (touched[id]) validateField(id);
+      if (id === "password") {
+        updateMeter();
+        if (touched.confirmPassword) validateField("confirmPassword");
+      }
+    });
+  });
+  form.querySelectorAll('input[name="gender"]').forEach((r) => r.addEventListener("change", () => validateField("gender")));
+  document.getElementById("terms").addEventListener("change", () => validateField("terms"));
+
+  // Password strength meter
+  function updateMeter() {
+    const v = document.getElementById("password").value;
+    const score = v ? passwordScore(v) : 0;
+    const levels = [
+      { w: "0%",   c: "transparent", t: "-" },
+      { w: "25%",  c: "#d63a4a",     t: "Weak" },
+      { w: "50%",  c: "#e8890c",     t: "Fair" },
+      { w: "75%",  c: "#c9a400",     t: "Good" },
+      { w: "100%", c: "#2f9e66",     t: "Strong" }
+    ];
+    const l = levels[score];
+    const bar = document.getElementById("meterBar");
+    bar.style.width = l.w;
+    bar.style.background = l.c;
+    document.getElementById("meterLabel").textContent = "Strength: " + l.t;
+  }
+
+  // Show / hide password buttons
+  document.querySelectorAll(".toggle").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const input = document.getElementById(btn.dataset.target);
+      const show = input.type === "password";
+      input.type = show ? "text" : "password";
+      btn.textContent = show ? "Hide" : "Show";
+    });
+  });
+
+  // Date of birth cannot be after today
+  document.getElementById("dob").max = new Date().toISOString().split("T")[0];
+
+  // Submit: validate everything; stop if anything is invalid
+  form.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const ids = ["fullName", "email", "phone", "dob", "gender", "country", "password", "confirmPassword", "terms"];
+    let firstInvalid = null;
+    ids.forEach((id) => {
+      if (!validateField(id) && !firstInvalid) firstInvalid = id;
+    });
+    if (firstInvalid) {
+      const target = firstInvalid === "gender" ? form.querySelector('input[name="gender"]')
+                   : document.getElementById(firstInvalid);
+      target.focus();
+      return;
+    }
+    showSuccess();
+  });
+
+  function showSuccess() {
+    const rows = [
+      ["Full name", getValue("fullName").trim()],
+      ["Email", getValue("email").trim()],
+      ["Mobile", getValue("phone").replace(/[\s-]/g, "")],
+      ["Date of birth", getValue("dob")],
+      ["Gender", getValue("gender")],
+      ["Country", getValue("country")]
+    ];
+    const box = document.getElementById("summary");
+    box.innerHTML = "";
+    rows.forEach(([k, v]) => {
+      const row = document.createElement("div");
+      const a = document.createElement("span"); a.textContent = k;
+      const b = document.createElement("span"); b.textContent = v;   // textContent keeps user input safe
+      row.append(a, b);
+      box.appendChild(row);
+    });
+    document.getElementById("formCard").hidden = true;
+    document.getElementById("successCard").hidden = false;
+  }
+
+  function clearForm() {
+    form.reset();
+    Object.keys(touched).forEach((k) => delete touched[k]);
+    ["fullName", "email", "phone", "dob", "gender", "country", "password", "confirmPassword", "terms"].forEach((id) => setState(id, ""));
+    document.querySelectorAll(".field").forEach((f) => f.classList.remove("valid", "invalid"));
+    document.querySelectorAll(".toggle").forEach((b) => { b.textContent = "Show"; document.getElementById(b.dataset.target).type = "password"; });
+    updateMeter();
+  }
+
+  document.getElementById("resetBtn").addEventListener("click", () => setTimeout(clearForm, 0));
+  document.getElementById("againBtn").addEventListener("click", () => {
+    clearForm();
+    document.getElementById("successCard").hidden = true;
+    document.getElementById("formCard").hidden = false;
+    document.getElementById("fullName").focus();
+  });
+</script>
+</body>
+</html>

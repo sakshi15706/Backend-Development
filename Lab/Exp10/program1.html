@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Experiment 10 - Program 1: jQuery Basics</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header>
+    <h1>Program 1: jQuery Basics</h1>
+    <p>Selectors, effects, animation, DOM manipulation, events and chaining</p>
+    <nav><a href="program1.html" class="active">Program 1</a> <a href="program2.html">Program 2</a></nav>
+  </header>
+
+  <main>
+
+    <!-- ===== 1. SELECTORS ===== -->
+    <section>
+      <h2>1. Selectors</h2>
+      <p>Each button below selects elements in a different way and highlights them.</p>
+      <ul id="fruitList">
+        <li class="fruit">Apple</li>
+        <li class="fruit">Banana</li>
+        <li class="fruit special">Mango</li>
+        <li class="fruit">Orange</li>
+        <li class="fruit">Grapes</li>
+      </ul>
+      <button id="selTag">$("li")</button>
+      <button id="selClass">$(".special")</button>
+      <button id="selFirst">:first</button>
+      <button id="selOdd">:odd</button>
+      <button id="selChild">$("#fruitList li:last-child")</button>
+      <button id="selReset" class="gray">Reset</button>
+      <pre class="out" id="selOut">Click a button</pre>
+    </section>
+
+    <!-- ===== 2. SHOW / HIDE / FADE / SLIDE ===== -->
+    <section>
+      <h2>2. Effects: hide, show, toggle, fade and slide</h2>
+      <div id="effectBox" class="box">I am a box. Use the buttons to change me.</div>
+      <button id="eHide">hide()</button>
+      <button id="eShow">show()</button>
+      <button id="eToggle">toggle()</button>
+      <button id="eFadeOut">fadeOut()</button>
+      <button id="eFadeIn">fadeIn()</button>
+      <button id="eFadeTo">fadeTo(0.3)</button>
+      <button id="eSlideUp">slideUp()</button>
+      <button id="eSlideDown">slideDown()</button>
+      <button id="eSlideToggle">slideToggle()</button>
+    </section>
+
+    <!-- ===== 3. ANIMATE ===== -->
+    <section>
+      <h2>3. animate()</h2>
+      <div class="track"><div id="ball"></div></div>
+      <button id="aMove">Move right</button>
+      <button id="aGrow">Grow</button>
+      <button id="aBack">Back</button>
+      <button id="aChain">Chain of animations</button>
+      <button id="aStop" class="gray">stop()</button>
+    </section>
+
+    <!-- ===== 4. CONTENT, CSS, ATTRIBUTES ===== -->
+    <section>
+      <h2>4. Get and set content, CSS and attributes</h2>
+      <p id="demoPara">This is <b>some</b> text inside a paragraph.</p>
+      <input type="text" id="demoInput" value="Hello jQuery">
+      <br>
+      <button id="cText">text()</button>
+      <button id="cHtml">html()</button>
+      <button id="cVal">val()</button>
+      <button id="cSetText">Set text</button>
+      <button id="cSetHtml">Set html</button>
+      <button id="cCss">css()</button>
+      <button id="cClass">toggleClass("highlight")</button>
+      <button id="cAttr">attr("title")</button>
+      <pre class="out" id="contentOut">Click a button</pre>
+    </section>
+
+    <!-- ===== 5. ADD AND REMOVE ELEMENTS ===== -->
+    <section>
+      <h2>5. Add and remove elements</h2>
+      <ol id="itemList">
+        <li>First item</li>
+        <li>Second item</li>
+      </ol>
+      <button id="dAppend">append()</button>
+      <button id="dPrepend">prepend()</button>
+      <button id="dAfter">after() first item</button>
+      <button id="dRemoveLast">remove() last</button>
+      <button id="dEmpty">empty()</button>
+      <button id="dClone">clone()</button>
+    </section>
+
+    <!-- ===== 6. EVENTS ===== -->
+    <section>
+      <h2>6. Events</h2>
+      <div id="eventBox" class="box event">Hover, click, double-click or move the mouse here</div>
+      <input type="text" id="keyInput" placeholder="Type here (keyup event)">
+      <select id="colorSelect">
+        <option value="">Choose a colour (change event)</option>
+        <option value="#ffd6d6">Pink</option>
+        <option value="#d6ffd6">Green</option>
+        <option value="#d6e4ff">Blue</option>
+      </select>
+      <pre class="out" id="eventOut">Events will be shown here</pre>
+    </section>
+
+    <!-- ===== 7. TRAVERSING ===== -->
+    <section>
+      <h2>7. Traversing the DOM</h2>
+      <div id="family">
+        <ul id="parentList">
+          <li>Item A</li>
+          <li id="middle">Item B (middle)</li>
+          <li>Item C</li>
+          <li>Item D</li>
+        </ul>
+      </div>
+      <button id="tParent">parent()</button>
+      <button id="tChildren">children()</button>
+      <button id="tSiblings">siblings()</button>
+      <button id="tNext">next()</button>
+      <button id="tPrev">prev()</button>
+      <button id="tNextAll">nextAll()</button>
+      <button id="tFilter">filter / eq(0)</button>
+      <button id="tEach">each()</button>
+      <pre class="out" id="travOut">Click a button</pre>
+    </section>
+
+    <!-- ===== 8. CHAINING ===== -->
+    <section>
+      <h2>8. Method chaining</h2>
+      <div id="chainBox" class="box">Chain target</div>
+      <button id="chainBtn">Run chain</button>
+      <pre class="out">$("#chainBox").css("background", "#ffe08a").slideUp(500).slideDown(500).text("Chain finished!");</pre>
+    </section>
+
+  </main>
+
+  <footer>
+    <p>&copy; 2026 Sakshi Jaiswal (SAP ID: 590015706) | Experiment 10: jQuery</p>
+  </footer>
+
+  <!-- jQuery from the CDN (needs internet) -->
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <script src="program1.js"></script>
+</body>
+</html>

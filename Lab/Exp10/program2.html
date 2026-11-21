@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Experiment 10 - Program 2: jQuery Task Manager</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header>
+    <h1>Program 2: Task Manager using jQuery</h1>
+    <p>A small application: form validation, add, complete, delete, filter, search, accordion and tabs</p>
+    <nav><a href="program1.html">Program 1</a> <a href="program2.html" class="active">Program 2</a></nav>
+  </header>
+
+  <main>
+
+    <!-- ===== TASK MANAGER ===== -->
+    <section>
+      <h2>Task Manager</h2>
+
+      <form id="taskForm" novalidate>
+        <input type="text" id="taskTitle" placeholder="Task title (at least 3 characters)">
+        <select id="taskPriority">
+          <option value="">Priority</option>
+          <option value="High">High</option>
+          <option value="Medium">Medium</option>
+          <option value="Low">Low</option>
+        </select>
+        <button type="submit">Add Task</button>
+        <div id="formError" class="error"></div>
+      </form>
+
+      <div class="toolbar">
+        <input type="text" id="searchBox" placeholder="Search tasks...">
+        <span>
+          <button class="filter active" data-filter="all">All</button>
+          <button class="filter" data-filter="pending">Pending</button>
+          <button class="filter" data-filter="done">Completed</button>
+        </span>
+      </div>
+
+      <ul id="taskList"></ul>
+      <p id="emptyMsg" class="muted">No tasks to show.</p>
+
+      <div class="stats">
+        Total: <b id="statTotal">0</b> |
+        Pending: <b id="statPending">0</b> |
+        Completed: <b id="statDone">0</b>
+      </div>
+      <div class="progress"><div id="progressBar"></div></div>
+
+      <button id="clearDone" class="gray">Clear completed</button>
+    </section>
+
+    <!-- ===== ACCORDION ===== -->
+    <section>
+      <h2>Accordion (slideToggle)</h2>
+      <div class="accordion">
+        <h3 class="acc-head">What is jQuery?</h3>
+        <div class="acc-body">jQuery is a fast, small JavaScript library. It makes DOM selection, events, effects and AJAX much shorter to write.</div>
+        <h3 class="acc-head">What does <code>$</code> mean?</h3>
+        <div class="acc-body"><code>$</code> is a short name for the <code>jQuery</code> function. <code>$("p")</code> selects all paragraphs.</div>
+        <h3 class="acc-head">Why use <code>$(document).ready()</code>?</h3>
+        <div class="acc-body">It runs the code only after the HTML is fully loaded, so the elements exist when jQuery looks for them.</div>
+      </div>
+    </section>
+
+    <!-- ===== TABS ===== -->
+    <section>
+      <h2>Tabs (show / hide)</h2>
+      <div class="tabs">
+        <button class="tab-btn active" data-tab="t1">HTML</button>
+        <button class="tab-btn" data-tab="t2">CSS</button>
+        <button class="tab-btn" data-tab="t3">JavaScript</button>
+      </div>
+      <div class="tab-panel" id="t1">HTML gives a web page its structure.</div>
+      <div class="tab-panel" id="t2" style="display:none">CSS controls the look and layout of the page.</div>
+      <div class="tab-panel" id="t3" style="display:none">JavaScript (and jQuery) makes the page interactive.</div>
+    </section>
+
+    <!-- ===== CHARACTER COUNTER ===== -->
+    <section>
+      <h2>Live character counter (keyup event)</h2>
+      <textarea id="note" rows="3" maxlength="100" placeholder="Type a note (maximum 100 characters)"></textarea>
+      <p><span id="charCount">0</span> / 100 characters, <span id="wordCount">0</span> word(s)</p>
+    </section>
+
+  </main>
+
+  <footer>
+    <p>&copy; 2026 Sakshi Jaiswal (SAP ID: 590015706) | Experiment 10: jQuery</p>
+  </footer>
+
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <script src="program2.js"></script>
+</body>
+</html>

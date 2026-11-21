@@ -168,9 +168,3 @@ Possible improvements:
 ## 9. Conclusion
 
 This experiment built a registration form validated entirely with client-side JavaScript. Rules for name, email, mobile number, date of birth, gender, country, password and terms were written as small functions that return error messages, using regular expressions where a format had to be checked. Validation runs on blur, on input and on submit, the form is blocked until every field is valid, and users get a password strength meter and show / hide option. It also showed that client-side validation improves user experience but must always be paired with server-side validation for security.
-
-## References
-
-1. MDN Web Docs: Client-side form validation, https://developer.mozilla.org/en-US/docs/Learn_web_development/Extensions/Forms/Form_validation
-2. MDN Web Docs: Regular expressions, https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_expressions
-3. MDN Web Docs: HTMLFormElement `submit` event, https://developer.mozilla.org/en-US/docs/Web/API/HTMLFormElement/submit_event

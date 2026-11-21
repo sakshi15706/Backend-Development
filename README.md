@@ -27,6 +27,12 @@
 - [Exp 5: JavaScript - Page](Lab/Exp5/index.html)
 - [Exp 5: JavaScript - Report](Lab/Exp5/Report.md)
 
+### Experiment 6: Client-Side Scripts for Form Validation using JavaScript
+
+- [Exp 6: Client-Side Scripts - Page](Lab/Exp6/index.html)
+- [Exp 6: Client-Side Scripts - Report](Lab/Exp6/Report.md)
+
+
 ### Experiment 12: Programs to Familiarize Server-Side Scripting using Node JS
 
 - [Exp 12: Server-Side Scripting- Page](Lab/Exp12/1_hello_server.js)

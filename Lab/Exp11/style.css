@@ -1,0 +1,181 @@
+/* =====================================================================
+   CampusConnect: CSS for the Ajax website (mobile first)
+   ===================================================================== */
+:root {
+  --primary: #1f3a5f;
+  --accent: #2c7be5;
+  --light: #f4f6f8;
+  --ok: #1e7e34;
+  --bad: #b42318;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  line-height: 1.6;
+  color: #222;
+  background: #fff;
+}
+a { color: var(--accent); }
+
+/* ---------- Header ---------- */
+.site-header {
+  background: var(--primary);
+  padding: 12px 20px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  z-index: 20;
+}
+.logo { color: #fff; font-size: 1.4rem; font-weight: bold; text-decoration: none; }
+.logo span { color: #7fb5ff; }
+#menu-toggle { display: none; }
+.menu-icon { color: #fff; font-size: 1.8rem; cursor: pointer; }
+.nav { display: none; width: 100%; flex-direction: column; margin-top: 8px; }
+.nav a { color: #fff; text-decoration: none; padding: 10px 0; border-top: 1px solid rgba(255,255,255,.2); }
+.nav a:hover { color: #7fb5ff; }
+#menu-toggle:checked ~ .nav { display: flex; }
+
+/* ---------- Hero ---------- */
+.hero {
+  background: linear-gradient(135deg, #1f3a5f, #2c7be5);
+  color: #fff;
+  text-align: center;
+  padding: 50px 20px;
+}
+.hero h1 { font-size: 1.8rem; margin-bottom: 10px; }
+.hero p { max-width: 650px; margin: 0 auto 18px; }
+.status-line { font-size: .95rem; margin-top: 18px; opacity: .95; }
+
+/* ---------- Buttons ---------- */
+.btn {
+  display: inline-block;
+  background: var(--accent);
+  color: #fff;
+  border: 0;
+  padding: 10px 22px;
+  border-radius: 24px;
+  font-size: 1rem;
+  text-decoration: none;
+  cursor: pointer;
+}
+.hero .btn { background: #fff; color: var(--primary); font-weight: bold; }
+.btn:hover { filter: brightness(.9); }
+.btn.small { padding: 6px 14px; font-size: .9rem; }
+.btn:disabled { background: #aaa; cursor: not-allowed; filter: none; }
+
+/* ---------- Sections ---------- */
+.section { padding: 34px 20px; max-width: 1100px; margin: auto; }
+.alt { background: var(--light); max-width: none; }
+.alt > * { max-width: 1060px; margin-left: auto; margin-right: auto; }
+h2 { color: var(--primary); margin-bottom: 14px; }
+h2 small { font-size: .55em; color: #666; font-weight: normal; }
+
+.toolbar { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 12px; }
+.toolbar input { flex: 1; min-width: 200px; }
+
+input[type="text"], input[type="email"], textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #999;
+  border-radius: 6px;
+  font: inherit;
+}
+input:focus, textarea:focus { outline: 2px solid var(--accent); }
+input.invalid, textarea.invalid { border-color: var(--bad); background: #fff0ef; }
+
+/* ---------- Status messages ---------- */
+.status { min-height: 24px; margin: 6px 0; font-size: .95rem; }
+.status.loading { color: #555; }
+.status.loading::before {
+  content: "";
+  display: inline-block;
+  width: 14px; height: 14px;
+  margin-right: 8px;
+  vertical-align: -2px;
+  border: 3px solid #ccc;
+  border-top-color: var(--accent);
+  border-radius: 50%;
+  animation: spin .8s linear infinite;
+}
+.status.error { color: var(--bad); }
+.status.ok { color: var(--ok); }
+.status button { margin-left: 8px; }
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* ---------- Student cards (1 / 2 / 3 columns) ---------- */
+.grid { display: grid; grid-template-columns: 1fr; gap: 14px; }
+.card {
+  background: #fff;
+  border: 1px solid #dde3ea;
+  border-radius: 10px;
+  padding: 16px;
+  box-shadow: 0 2px 5px rgba(0,0,0,.08);
+}
+.card h3 { color: var(--primary); font-size: 1.05rem; }
+.card p { font-size: .92rem; color: #444; }
+.avatar {
+  width: 42px; height: 42px;
+  border-radius: 50%;
+  background: var(--accent);
+  color: #fff;
+  display: flex; align-items: center; justify-content: center;
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+
+/* ---------- Posts ---------- */
+.posts { display: grid; grid-template-columns: 1fr; gap: 14px; }
+.post {
+  background: #fff;
+  border-radius: 8px;
+  padding: 14px 16px;
+  box-shadow: 0 2px 5px rgba(0,0,0,.1);
+}
+.post h3 { text-transform: capitalize; font-size: 1.02rem; color: var(--primary); }
+.post p { font-size: .93rem; color: #444; margin: 6px 0 10px; }
+.comments { margin-top: 10px; border-top: 1px dashed #bbb; padding-top: 8px; font-size: .88rem; }
+.comments div { background: #f4f8ff; padding: 6px 10px; border-radius: 6px; margin-bottom: 6px; }
+.pager { display: flex; justify-content: center; align-items: center; gap: 16px; margin-top: 16px; }
+
+/* ---------- Form ---------- */
+#contactForm { max-width: 620px; }
+.field { margin-bottom: 14px; }
+.field label { display: block; font-weight: bold; margin-bottom: 4px; }
+.out {
+  background: #1e1e1e;
+  color: #7CFC9A;
+  padding: 12px 14px;
+  border-radius: 6px;
+  margin-top: 16px;
+  max-width: 620px;
+  white-space: pre-wrap;
+  font-family: "Courier New", monospace;
+  font-size: 13px;
+}
+.out[hidden] { display: none; }
+
+/* ---------- Footer ---------- */
+.site-footer { background: var(--primary); color: #fff; text-align: center; padding: 18px 20px; }
+.small-note { font-size: .8rem; opacity: .8; margin-top: 4px; }
+
+/* ---------- Tablet ---------- */
+@media (min-width: 601px) {
+  .hero h1 { font-size: 2.3rem; }
+  .grid { grid-template-columns: repeat(2, 1fr); }
+  .posts { grid-template-columns: repeat(2, 1fr); }
+}
+
+/* ---------- Laptop ---------- */
+@media (min-width: 901px) {
+  .menu-icon { display: none; }
+  .nav { display: flex; flex-direction: row; width: auto; margin-top: 0; }
+  .nav a { border-top: 0; padding: 8px 14px; }
+  .hero { padding: 80px 20px; }
+  .grid { grid-template-columns: repeat(3, 1fr); }
+}

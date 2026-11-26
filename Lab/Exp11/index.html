@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="CampusConnect: a small website built with HTML, CSS and JavaScript that uses Ajax">
+  <title>CampusConnect - Website with Ajax</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ================= HEADER AND NAVIGATION ================= -->
+  <header class="site-header">
+    <a href="#home" class="logo">Campus<span>Connect</span></a>
+    <input type="checkbox" id="menu-toggle">
+    <label for="menu-toggle" class="menu-icon" aria-label="Toggle menu">&#9776;</label>
+    <nav class="nav">
+      <a href="#home">Home</a>
+      <a href="#users">Students</a>
+      <a href="#posts">Posts</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+
+  <!-- ================= HOME ================= -->
+  <section class="hero" id="home">
+    <h1>Welcome to CampusConnect</h1>
+    <p>A small website built with HTML, CSS and JavaScript. All the data below is loaded with <b>Ajax</b>, without reloading the page.</p>
+    <a href="#users" class="btn">See the students</a>
+    <p class="status-line">Ajax requests made so far: <b id="reqCount">0</b></p>
+  </section>
+
+  <main>
+
+    <!-- ================= STUDENTS (XMLHttpRequest) ================= -->
+    <section id="users" class="section">
+      <h2>Students <small>(loaded with XMLHttpRequest)</small></h2>
+      <div class="toolbar">
+        <input type="text" id="userSearch" placeholder="Search by name, email or city...">
+        <button id="reloadUsers" class="btn small">Reload</button>
+      </div>
+      <div id="userStatus" class="status"></div>
+      <div id="userGrid" class="grid"></div>
+    </section>
+
+    <!-- ================= POSTS (fetch) ================= -->
+    <section id="posts" class="section alt">
+      <h2>Posts <small>(loaded with fetch, 6 per page)</small></h2>
+      <div id="postStatus" class="status"></div>
+      <div id="postList" class="posts"></div>
+      <div class="pager">
+        <button id="prevPage" class="btn small">&laquo; Previous</button>
+        <span>Page <b id="pageNo">1</b></span>
+        <button id="nextPage" class="btn small">Next &raquo;</button>
+      </div>
+    </section>
+
+    <!-- ================= CONTACT FORM (POST with fetch) ================= -->
+    <section id="contact" class="section">
+      <h2>Contact Us <small>(sent with a POST request)</small></h2>
+      <form id="contactForm" novalidate>
+        <div class="field">
+          <label for="cName">Name</label>
+          <input type="text" id="cName" name="name" placeholder="Your name">
+        </div>
+        <div class="field">
+          <label for="cEmail">Email</label>
+          <input type="email" id="cEmail" name="email" placeholder="you@example.com">
+        </div>
+        <div class="field">
+          <label for="cMsg">Message</label>
+          <textarea id="cMsg" name="message" rows="4" placeholder="Write at least 10 characters"></textarea>
+        </div>
+        <div id="formStatus" class="status"></div>
+        <button type="submit" class="btn" id="sendBtn">Send Message</button>
+      </form>
+      <pre id="formResponse" class="out" hidden></pre>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <p>&copy; 2026 Sakshi Jaiswal (SAP ID: 590015706) | Experiment 11: Website with Ajax</p>
+    <p class="small-note">Data provided by the free test API JSONPlaceholder (jsonplaceholder.typicode.com)</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

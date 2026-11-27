@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>{{ student.name }}</h1>
+<p>SAP ID: {{ student.sap }}</p>
+<p>Marks: {{ student.marks }}</p>
+{% if student.marks >= 40 %}
+  <p class="pass">{{ student.marks | grade }}</p>
+{% else %}
+  <p class="fail">Fail</p>
+{% endif %}
+<a href="{{ url_for('student_list') }}">Back to list</a>
+{% endblock %}

@@ -1,0 +1,13 @@
+{
+  "name": "unit-2-p-2-mongoose-blog",
+  "version": "1.0.0",
+  "description": "P-2: Mongoose schemas for a Blog (Post and Comment) with validation",
+  "main": "demo.js",
+  "scripts": {
+    "start": "node demo.js",
+    "test": "node validate.test.js"
+  },
+  "dependencies": {
+    "mongoose": "^8.4.0"
+  }
+}

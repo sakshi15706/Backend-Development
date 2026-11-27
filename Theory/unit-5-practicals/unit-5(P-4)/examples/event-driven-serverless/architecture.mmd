@@ -1,0 +1,8 @@
+flowchart LR
+    P([Attendance service<br/>producer]) -->|1 publish<br/>attendance.marked| Q[(SQS queue<br/>sms-events)]
+    Q -->|2 poll, batch of up to 10| L[[Lambda<br/>AttendanceConsumer]]
+    L -->|3 PutItem<br/>attribute_not_exists eventId| D[(DynamoDB<br/>AuditTable)]
+    L -. 4a success or duplicate: message deleted from queue .-> Q
+    L -. 4b failed record returned via batchItemFailures: reappears after visibility timeout .-> Q
+    Q -->|5 after 3 failed receives| X[(Dead-letter queue<br/>sms-events-dlq)]
+    X -.->|6 inspect and replay| H([Human / ops])

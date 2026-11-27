@@ -1,0 +1,14 @@
+{% extends "forms/base.html" %}
+{% block title %}Registered students{% endblock %}
+{% block content %}
+    <h1>Registered students ({{ registrations|length }})</h1>
+    <table>
+        <tr><th>Name</th><th>Email</th><th>Age</th><th>Course</th><th>Phone</th></tr>
+        {% for r in registrations %}
+            <tr><td>{{ r.name }}</td><td>{{ r.email }}</td><td>{{ r.age }}</td><td>{{ r.course }}</td><td>{{ r.phone|default:"-" }}</td></tr>
+        {% empty %}
+            <tr><td colspan="5">No registrations yet.</td></tr>
+        {% endfor %}
+    </table>
+    <p><a href="{% url 'forms_app:register' %}">Register a student</a></p>
+{% endblock %}

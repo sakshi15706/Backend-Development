@@ -1,0 +1,17 @@
+{
+  "name": "unit-1-p-6-ejs",
+  "version": "1.0.0",
+  "description": "P-6A: Server-side rendering with EJS",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "nodemon server.js"
+  },
+  "dependencies": {
+    "ejs": "^3.1.10",
+    "express": "^4.19.2"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.0"
+  }
+}

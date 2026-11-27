@@ -1,0 +1,19 @@
+{
+  "name": "sms-profiling",
+  "version": "1.0.0",
+  "description": "Unit 5 (P-3): measuring latency, throughput and bottlenecks in Express and FastAPI (Lecture 58)",
+  "main": "express-app/server.js",
+  "scripts": {
+    "start": "node express-app/server.js",
+    "test": "node --test express-app/test/*.test.js",
+    "loadtest": "npx autocannon -c 50 -d 30 http://localhost:3000/api/ping",
+    "experiment": "node scripts/run-experiment.js"
+  },
+  "license": "ISC",
+  "dependencies": {
+    "express": "^5.1.0"
+  },
+  "devDependencies": {
+    "autocannon": "^8.0.0"
+  }
+}

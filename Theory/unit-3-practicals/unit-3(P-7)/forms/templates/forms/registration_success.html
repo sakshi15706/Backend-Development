@@ -1,0 +1,10 @@
+{% extends "forms/base.html" %}
+{% block title %}Registration Complete{% endblock %}
+{% block content %}
+    <h1>Registration complete</h1>
+    {% for message in messages %}
+        <p class="message">{{ message }}</p>
+    {% endfor %}
+    <p>The student record has been saved successfully.</p>
+    <a href="{% url 'forms_app:register' %}">Register another student</a>
+{% endblock %}

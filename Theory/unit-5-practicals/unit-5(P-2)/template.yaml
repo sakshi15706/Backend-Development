@@ -1,0 +1,81 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: SMS attendance.marked / result.published consumer (SQS -> Lambda -> DynamoDB), least-privilege role
+
+Parameters:
+  LambdaRuntime:
+    Type: String
+    Default: nodejs22.x          # the slide uses nodejs20.x, which was no longer in AWS's supported-runtimes table when I checked (Nov 2026)
+    Description: Node.js Lambda runtime identifier
+
+Globals:
+  Function:
+    Timeout: 10                  # seconds; must be SHORTER than the queue visibility timeout below
+    MemorySize: 128
+
+Resources:
+  # ---- the dead-letter queue: messages that keep failing end up here for a human to inspect
+  SmsEventsDLQ:
+    Type: AWS::SQS::Queue
+    Properties:
+      QueueName: sms-events-dlq
+      MessageRetentionPeriod: 1209600     # 14 days
+
+  # ---- the main queue between producer and function (decouples fast producer from slower consumer)
+  SmsEventsQueue:
+    Type: AWS::SQS::Queue
+    Properties:
+      QueueName: sms-events
+      VisibilityTimeout: 60               # AWS guidance has been at least 6 x the function timeout (check the Lambda + SQS page)
+      RedrivePolicy:
+        deadLetterTargetArn: !GetAtt SmsEventsDLQ.Arn
+        maxReceiveCount: 3                # after 3 failed receives the message moves to the DLQ
+
+  # ---- idempotency + audit table. eventId is the key, so a second write of the same event is rejected
+  AuditTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      BillingMode: PAY_PER_REQUEST
+      AttributeDefinitions:
+        - AttributeName: eventId
+          AttributeType: S
+      KeySchema:
+        - AttributeName: eventId
+          KeyType: HASH
+
+  AttendanceConsumer:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: src/
+      Handler: index.handler
+      Runtime: !Ref LambdaRuntime
+      Architectures: [arm64]
+      Environment:
+        Variables:
+          AUDIT_TABLE: !Ref AuditTable     # configuration from the environment, never from code
+      Policies:
+        # Scoped inline policy: ONE action on ONE table. (The SAM template DynamoDBCrudPolicy would
+        # also allow read, update and delete.) SAM adds AWSLambdaBasicExecutionRole (CloudWatch Logs)
+        # and the SQS receive/delete permissions for the event source automatically.
+        - Version: '2012-10-17'
+          Statement:
+            - Effect: Allow
+              Action: dynamodb:PutItem
+              Resource: !GetAtt AuditTable.Arn
+      Events:
+        SqsEvent:
+          Type: SQS
+          Properties:
+            Queue: !GetAtt SmsEventsQueue.Arn
+            BatchSize: 10
+            FunctionResponseTypes: [ReportBatchItemFailures]   # enables the partial batch response
+
+Outputs:
+  SmsEventsQueueUrl:
+    Value: !Ref SmsEventsQueue
+  SmsEventsDLQUrl:
+    Value: !Ref SmsEventsDLQ
+  AuditTableName:
+    Value: !Ref AuditTable
+  ConsumerFunctionName:
+    Value: !Ref AttendanceConsumer

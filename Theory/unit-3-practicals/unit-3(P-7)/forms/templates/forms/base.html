@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Students{% endblock %}</title>
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 650px; margin: 40px auto; padding: 0 20px; }
+        form { display: grid; gap: 16px; }
+        input, select { width: 100%; padding: 10px; box-sizing: border-box; }
+        input[type=checkbox] { width: auto; }
+        .errorlist { color: #b91c1c; margin: 4px 0 0; padding-left: 18px; }
+        .message { background: #ecfdf5; border: 1px solid #10b981; padding: 8px 12px; border-radius: 4px; }
+        table { border-collapse: collapse; width: 100%; }
+        th, td { border: 1px solid #ccc; padding: 6px 10px; text-align: left; }
+        button { padding: 10px 16px; cursor: pointer; }
+    </style>
+</head>
+<body>
+    {% block content %}{% endblock %}
+</body>
+</html>

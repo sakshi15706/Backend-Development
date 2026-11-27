@@ -1,0 +1,150 @@
+{
+  "meta": {
+    "node": "v22.23.5",
+    "cpus": 2,
+    "cpuModel": "Intel(R) Xeon(R) Processor @ 2.10GHz",
+    "date": "2026-11-24T06:13:45.574Z"
+  },
+  "results": [
+    {
+      "scenario": "A. baseline /api/ping (run 1)",
+      "endpoint": "/api/ping",
+      "connections": 50,
+      "durationSeconds": 30,
+      "reqPerSec": 9980,
+      "totalRequests": 299388,
+      "client": {
+        "p50": 4,
+        "p97_5": 10,
+        "p99": 12,
+        "max": 73,
+        "mean": 4.45
+      },
+      "server": {
+        "p50": 0.052,
+        "p95": 0.112,
+        "p99": 0.259,
+        "mean": 0.064,
+        "windowSamples": 1000
+      },
+      "errors": 0,
+      "timeouts": 0,
+      "eventLoopP99Ms": 8.819,
+      "eventLoopMaxMs": 37.115,
+      "cpuSeconds": 35.717,
+      "rssMB": 129.336
+    },
+    {
+      "scenario": "B. baseline /api/ping (run 2, same settings)",
+      "endpoint": "/api/ping",
+      "connections": 50,
+      "durationSeconds": 30,
+      "reqPerSec": 9762,
+      "totalRequests": 292861,
+      "client": {
+        "p50": 4,
+        "p97_5": 10,
+        "p99": 12,
+        "max": 78,
+        "mean": 4.57
+      },
+      "server": {
+        "p50": 0.052,
+        "p95": 0.114,
+        "p99": 0.255,
+        "mean": 0.062,
+        "windowSamples": 1000
+      },
+      "errors": 0,
+      "timeouts": 0,
+      "eventLoopP99Ms": 9.475,
+      "eventLoopMaxMs": 14.144,
+      "cpuSeconds": 36.044,
+      "rssMB": 129.848
+    },
+    {
+      "scenario": "C. /api/ping + 50 ms await (slow \"database\")",
+      "endpoint": "/api/ping",
+      "connections": 50,
+      "durationSeconds": 30,
+      "reqPerSec": 972,
+      "totalRequests": 29152,
+      "client": {
+        "p50": 51,
+        "p97_5": 54,
+        "p99": 56,
+        "max": 82,
+        "mean": 50.91
+      },
+      "server": {
+        "p50": 50.767,
+        "p95": 52.273,
+        "p99": 54.553,
+        "mean": 50.887,
+        "windowSamples": 1000
+      },
+      "errors": 0,
+      "timeouts": 0,
+      "eventLoopP99Ms": 2.839,
+      "eventLoopMaxMs": 21.976,
+      "cpuSeconds": 7.534,
+      "rssMB": 118.027
+    },
+    {
+      "scenario": "D. /api/ping + 5 ms synchronous CPU block",
+      "endpoint": "/api/ping",
+      "connections": 50,
+      "durationSeconds": 30,
+      "reqPerSec": 189,
+      "totalRequests": 5664,
+      "client": {
+        "p50": 260,
+        "p97_5": 274,
+        "p99": 512,
+        "max": 2225,
+        "mean": 263.27
+      },
+      "server": {
+        "p50": 5.144,
+        "p95": 5.235,
+        "p99": 5.456,
+        "mean": 5.162,
+        "windowSamples": 1000
+      },
+      "errors": 0,
+      "timeouts": 0,
+      "eventLoopP99Ms": 252.105,
+      "eventLoopMaxMs": 263.64,
+      "cpuSeconds": 33.877,
+      "rssMB": 106.598
+    },
+    {
+      "scenario": "E. /api/attendance (PBL endpoint, 200 rows)",
+      "endpoint": "/api/attendance",
+      "connections": 50,
+      "durationSeconds": 30,
+      "reqPerSec": 5917,
+      "totalRequests": 177489,
+      "client": {
+        "p50": 7,
+        "p97_5": 14,
+        "p99": 16,
+        "max": 40,
+        "mean": 7.94
+      },
+      "server": {
+        "p50": 0.116,
+        "p95": 0.203,
+        "p99": 0.282,
+        "mean": 0.137,
+        "windowSamples": 1000
+      },
+      "errors": 0,
+      "timeouts": 0,
+      "eventLoopP99Ms": 11.85,
+      "eventLoopMaxMs": 17.585,
+      "cpuSeconds": 35.993,
+      "rssMB": 131.867
+    }
+  ]
+}

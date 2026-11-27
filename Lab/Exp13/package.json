@@ -1,18 +1,17 @@
 {
-  "name": "mongoose-demo",
+  "name": "exp13-mongodb-with-nodejs",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "Experiment 13: Programs using MongoDB database with Node JS",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "connect": "node 1_connect.js",
+    "insert": "node 2_insert.js",
+    "find": "node 3_find.js",
+    "update": "node 4_update_delete.js",
+    "aggregate": "node 5_aggregate_index.js",
+    "api": "node 6_student_api.js"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "type": "commonjs",
   "dependencies": {
-    "express": "^5.2.1",
-    "mongoose": "^9.10.1"
+    "express": "^4.19.2",
+    "mongodb": "^6.8.0"
   }
 }

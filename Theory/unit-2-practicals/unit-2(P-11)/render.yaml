@@ -1,0 +1,30 @@
+# Render "Blueprint": New + > Blueprint > pick your repo. Check Render's current docs and free-plan limits
+# before you rely on this file; plan names and limits change.
+databases:
+  - name: student-api-db
+    plan: free
+
+services:
+  - type: web
+    name: student-api
+    runtime: python
+    plan: free
+    rootDir: unit-2(P-11)          # delete this line if this project is the root of your repository
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT
+    healthCheckPath: /health
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.12.7
+      - key: ENVIRONMENT
+        value: production
+      - key: SECRET_KEY
+        generateValue: true          # Render creates a random secret for you
+      - key: DATABASE_URL
+        fromDatabase:
+          name: student-api-db
+          property: connectionString
+      - key: ADMIN_EMAIL
+        sync: false                  # you type these in the dashboard, they are not stored in git
+      - key: ADMIN_PASSWORD
+        sync: false

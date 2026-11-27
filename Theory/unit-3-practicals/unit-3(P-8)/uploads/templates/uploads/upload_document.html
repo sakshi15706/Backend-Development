@@ -1,0 +1,12 @@
+{% extends "uploads/base.html" %}
+{% block title %}Upload Student Document{% endblock %}
+{% block content %}
+    <h1>Upload Student Document</h1>
+    {# enctype is essential: without it the browser sends the text fields but not the file #}
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.non_field_errors }}
+        {{ form.as_p }}
+        <button type="submit">Upload</button>
+    </form>
+{% endblock %}

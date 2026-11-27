@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>P-5: LocalStorage, SessionStorage and JSON</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main>
+    <h1>LocalStorage, SessionStorage &amp; JSON</h1>
+
+    <section>
+      <h2>1. Notes (localStorage, persists after closing the browser)</h2>
+      <form id="noteForm">
+        <input id="noteInput" placeholder="Write a note..." required />
+        <button>Add</button>
+      </form>
+      <ul id="noteList"></ul>
+      <button id="clearNotes" class="secondary">Clear all notes</button>
+    </section>
+
+    <section>
+      <h2>2. Page visits (sessionStorage, cleared when the tab closes)</h2>
+      <p id="visitInfo"></p>
+      <button id="resetVisits" class="secondary">Reset session counter</button>
+    </section>
+
+    <section>
+      <h2>3. JSON: stringify / parse</h2>
+      <button id="jsonDemo">Run JSON demo</button>
+      <pre id="jsonOutput"></pre>
+    </section>
+
+    <section>
+      <h2>4. Storage inspector</h2>
+      <button id="inspect">Show storage contents</button>
+      <pre id="storageOutput"></pre>
+    </section>
+  </main>
+  <script src="script.js"></script>
+</body>
+</html>

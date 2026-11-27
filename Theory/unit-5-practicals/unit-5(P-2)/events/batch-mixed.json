@@ -1,0 +1,9 @@
+{
+  "Records": [
+    { "messageId": "m1", "body": "{\"eventId\":\"evt-2001\",\"type\":\"attendance.marked\",\"studentId\":\"S1\",\"classId\":\"c1\",\"present\":true,\"at\":1}", "eventSource": "aws:sqs" },
+    { "messageId": "m2", "body": "{\"eventId\":\"evt-2001\",\"type\":\"attendance.marked\",\"studentId\":\"S1\",\"classId\":\"c1\",\"present\":true,\"at\":1}", "eventSource": "aws:sqs" },
+    { "messageId": "m3", "body": "this is not json", "eventSource": "aws:sqs" },
+    { "messageId": "m4", "body": "{\"eventId\":\"evt-2002\",\"type\":\"result.published\",\"studentId\":\"S2\",\"classId\":\"c1\",\"at\":2}", "eventSource": "aws:sqs" },
+    { "messageId": "m5", "body": "{\"eventId\":\"evt-2003\",\"type\":\"something.else\"}", "eventSource": "aws:sqs" }
+  ]
+}

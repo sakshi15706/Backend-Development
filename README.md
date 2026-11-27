@@ -32,11 +32,41 @@
 - [Exp 6: Client-Side Scripts - Page](Lab/Exp6/index.html)
 - [Exp 6: Client-Side Scripts - Report](Lab/Exp6/Report.md)
 
+### Experiment 7:
+
+-
+-
+
+### Experiment 8:
+
+-
+-
+
+### Experiment 9:
+
+-
+-
+
+### Experiment 10:
+
+-
+-
+
+### Experiment 11:
+
+-
+-
 
 ### Experiment 12: Programs to Familiarize Server-Side Scripting using Node JS
 
 - [Exp 12: Server-Side Scripting- Page](Lab/Exp12/1_hello_server.js)
 - [Exp 12: Server-Side Scripting - Report](Lab/Exp12/Report.md)
+
+### Experiment 13:
+
+-
+-
+
 
 ## Viva
 

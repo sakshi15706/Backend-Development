@@ -1,0 +1,6 @@
+{
+  "name": "sms-attendance-email-function",
+  "version": "1.0.0",
+  "description": "Cloud-function entry point (Functions Framework) for unit-5(P-1) Task 3",
+  "main": "index.js"
+}

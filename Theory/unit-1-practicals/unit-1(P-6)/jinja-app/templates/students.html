@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Student List</h1>
+<table>
+  <thead>
+    <tr><th>Name</th><th>SAP ID</th><th>Marks</th><th>Result</th></tr>
+  </thead>
+  <tbody>
+    {% for s in students %}
+    <tr>
+      <td><a href="{{ url_for('student_detail', sap=s.sap) }}">{{ s.name }}</a></td>
+      <td>{{ s.sap }}</td>
+      <td>{{ s.marks }}</td>
+      <td class="{{ 'pass' if s.marks >= 40 else 'fail' }}">{{ s.marks | grade }}</td>
+    </tr>
+    {% else %}
+    <tr><td colspan="4">No students found.</td></tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

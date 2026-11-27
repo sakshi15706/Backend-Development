@@ -1,0 +1,15 @@
+{
+  "Records": [
+    {
+      "messageId": "059f36b4-87a3-44ab-83d2-661975830a7d",
+      "receiptHandle": "AQEBwJnKyrHigUMZj6rYigCgxlaS3SLy0a",
+      "body": "{\"eventId\":\"evt-1001\",\"type\":\"attendance.marked\",\"studentId\":\"S102\",\"classId\":\"class-5A\",\"present\":true,\"at\":1730000000000}",
+      "attributes": { "ApproximateReceiveCount": "1", "SentTimestamp": "1730000000000" },
+      "messageAttributes": {},
+      "md5OfBody": "not-checked-locally",
+      "eventSource": "aws:sqs",
+      "eventSourceARN": "arn:aws:sqs:us-east-1:123456789012:sms-events",
+      "awsRegion": "us-east-1"
+    }
+  ]
+}

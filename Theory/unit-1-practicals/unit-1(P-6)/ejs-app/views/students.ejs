@@ -1,0 +1,18 @@
+<%- include('partials/header') %>
+<h1>Student List</h1>
+<table>
+  <thead>
+    <tr><th>Name</th><th>SAP ID</th><th>Marks</th><th>Result</th></tr>
+  </thead>
+  <tbody>
+    <% students.forEach(s => { %>
+      <tr>
+        <td><a href="/students/<%= s.sap %>"><%= s.name %></a></td>
+        <td><%= s.sap %></td>
+        <td><%= s.marks %></td>
+        <td class="<%= s.marks >= 40 ? 'pass' : 'fail' %>"><%= s.marks >= 40 ? 'Pass' : 'Fail' %></td>
+      </tr>
+    <% }) %>
+  </tbody>
+</table>
+<%- include('partials/footer') %>

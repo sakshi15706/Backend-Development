@@ -1,0 +1,6 @@
+{% extends "uploads/base.html" %}
+{% block title %}Upload Complete{% endblock %}
+{% block content %}
+    <h1>Upload complete</h1>
+    <a href="{% url 'uploads:upload' %}">Upload another document</a>
+{% endblock %}

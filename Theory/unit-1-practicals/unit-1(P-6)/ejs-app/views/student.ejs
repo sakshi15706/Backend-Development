@@ -1,0 +1,13 @@
+<%- include('partials/header') %>
+<h1><%= student.name %></h1>
+<p>SAP ID: <%= student.sap %></p>
+<p>Marks: <%= student.marks %></p>
+<% if (student.marks >= 75) { %>
+  <p class="pass">Distinction</p>
+<% } else if (student.marks >= 40) { %>
+  <p class="pass">Pass</p>
+<% } else { %>
+  <p class="fail">Fail</p>
+<% } %>
+<a href="/students">Back to list</a>
+<%- include('partials/footer') %>

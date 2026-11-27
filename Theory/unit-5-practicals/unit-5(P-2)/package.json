@@ -1,0 +1,15 @@
+{
+  "name": "sms-attendance-consumer",
+  "version": "1.0.0",
+  "description": "Unit 5 (P-2): AWS Lambda SQS consumer with DynamoDB idempotency (Lectures 55-57)",
+  "type": "module",
+  "scripts": {
+    "test": "node --test",
+    "invoke:local": "node scripts/invoke-local.mjs"
+  },
+  "license": "ISC",
+  "dependencies": {
+    "@aws-sdk/client-dynamodb": "^3.600.0",
+    "@aws-sdk/lib-dynamodb": "^3.600.0"
+  }
+}

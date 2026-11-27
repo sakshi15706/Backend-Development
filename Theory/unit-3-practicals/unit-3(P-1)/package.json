@@ -1,0 +1,16 @@
+{
+  "name": "express-api",
+  "version": "1.0.0",
+  "description": "Student Management API skeleton (Unit 3, Lecture 25)",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "test": "node --test"
+  },
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.22.3"
+  },
+  "keywords": [],
+  "author": ""
+}

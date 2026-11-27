@@ -1,0 +1,10 @@
+*.db
+*.pyc
+.DS_Store
+.env
+.pytest_cache/
+.venv/
+__pycache__/
+node_modules/
+unit-2(P-9)/uploads/
+venv/

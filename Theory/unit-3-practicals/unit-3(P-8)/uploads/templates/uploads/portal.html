@@ -1,0 +1,27 @@
+{% extends "uploads/base.html" %}
+{% block title %}My documents{% endblock %}
+{% block content %}
+    <h1>My documents</h1>
+    <p>Signed in as <strong>{{ request.user.username }}</strong>.</p>
+
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Upload PDF (max 10 MB)</button>
+    </form>
+
+    <table>
+        <tr><th>File</th><th>Size</th><th>Uploaded</th><th></th></tr>
+        {% for d in documents %}
+            <tr>
+                {# autoescaped: a file called <script>.pdf is shown as text, never run #}
+                <td>{{ d.original_name }}</td>
+                <td>{{ d.size|filesizeformat }}</td>
+                <td>{{ d.uploaded_at|date:"Y-m-d H:i" }}</td>
+                <td><a href="{% url 'uploads:portal-download' d.pk %}">Download</a></td>
+            </tr>
+        {% empty %}
+            <tr><td colspan="4">No documents yet.</td></tr>
+        {% endfor %}
+    </table>
+{% endblock %}

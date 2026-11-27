@@ -1,0 +1,12 @@
+*.db
+*.pyc
+.DS_Store
+.aws-sam/
+.env
+.pytest_cache/
+.venv/
+__pycache__/
+node_modules/
+samconfig.toml
+unit-2(P-9)/uploads/
+venv/
